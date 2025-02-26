@@ -127,6 +127,29 @@
       cursor: pointer;
     }
 
+    .info-button {
+      position: absolute;
+      bottom: -60px;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: white;
+      background-color: #021530;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      display: none;
+    }
+
+    .full-suspension .info-button {
+      left: 15%;
+    }
+
+    .hardtail .info-button {
+      right: 15%;
+    }
+
     @media (max-width: 768px) {
       .container {
         flex-direction: column;
@@ -161,10 +184,12 @@
   <div class="bike-option full-suspension">
     <img src="mtb_bike_xl.svg" alt="Full Suspension">
     <div class="label">Full Suspension</div>
+    <button class="info-button" id="fullSuspensionBtn">Mehr Infos</button>
   </div>
   <div class="bike-option hardtail">
     <img src="road_bike_xl.svg" alt="Hardtail">
     <div class="label">Hardtail</div>
+    <button class="info-button" id="hardtailBtn">Mehr Infos</button>
   </div>
 </div>
 
@@ -175,24 +200,32 @@
   </div>
   
   <div class="slider-container">
-    <input type="range" min="0" max="100" value="50" class="slider" id="preferenceSlider">
+    <input type="range" min="0" max="100" value="50" class="slider" id="preferenceSlider" style="appearance: auto;">
   </div>
 </div>
 
 <script>
   const slider = document.getElementById("preferenceSlider");
   const container = document.getElementById("bikeContainer");
+  const fullSuspensionBtn = document.getElementById("fullSuspensionBtn");
+  const hardtailBtn = document.getElementById("hardtailBtn");
 
   slider.addEventListener("input", function() {
     const value = parseInt(this.value);
     if (value < 40) {
       container.classList.add("full-focus");
       container.classList.remove("hard-focus");
+      fullSuspensionBtn.style.display = "block";
+      hardtailBtn.style.display = "none";
     } else if (value > 60) {
       container.classList.add("hard-focus");
       container.classList.remove("full-focus");
+      hardtailBtn.style.display = "block";
+      fullSuspensionBtn.style.display = "none";
     } else {
       container.classList.remove("full-focus", "hard-focus");
+      fullSuspensionBtn.style.display = "none";
+      hardtailBtn.style.display = "none";
     }
   });
 </script>
