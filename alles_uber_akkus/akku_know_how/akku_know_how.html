@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akkus Know-How</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      color: #021530;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
+    }
+
+    .box {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      max-height: 
+        250px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .box h2 {
+      background-color: #021530;
+      color: #76CCD9;
+      padding: 10px;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      margin: -20px -20px 20px -20px;
+    }
+
+    .box p {
+      flex-grow: 1;
+    }
+
+    .big-box {
+      background-color: #021530;
+      color: white;
+      border-radius: 8px;
+      padding: 30px;
+      width: 1000px;
+      max-width: 1000px;
+      margin: auto;
+      text-align: left;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      grid-column: span 3;
+    }
+
+    .big-box h2 {
+      color: #76CCD9;
+      margin-bottom: 15px;
+    }
+
+    .big-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .big-box ul li {
+      margin-bottom: 10px;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1000px;
+      margin: 30px auto 0;
+    }
+    
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #13BABC;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      width: auto;
+      min-width: 120px;
+      height: 40px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+      border: 0;
+    }
+
+    .button:hover {
+      background-color: #0f9a99;
+      transform: scale(1.05);
+    }
+
+    .button:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="page-title"></h1>
+
+<div class="container" id="fact-container"></div>
+
+<div class="buttons-container">
+  <button class="button" id="prevBtn" onclick="changeSlide(-1)">← Zurück</button>
+  <button class="button" id="nextBtn" onclick="changeSlide(1)">Weiter →</button>
+</div>
+
+<script>
+  const slides = [
+    {
+      title: "6 Fakten über eBike-Akkus:",
+      content: `
+        <div class="box"><h2>500 Euro</h2><p>Kostet ein eBike-Akku durchschnittlich. Er ist damit das teuerste Einzelbauteil an einem eBike.</p></div>
+        <div class="box"><h2>40 Zellen</h2><p>Aus so vielen Einzelzellen besteht ein durchschnittlicher Akku.</p></div>
+        <div class="box"><h2>15-20 Cent</h2><p>Kostet die vollständige Aufladung eines eBike Akkus ungefähr.</p></div>
+        <div class="box"><h2>4-5 Stunden</h2><p>Dauert in der Regel eine komplette Vollladung eines Akkus (abhängig von Kapazität und Ladegerät).</p></div>
+        <div class="box"><h2>3 kg</h2><p>Ist das durchschnittliche Gewicht eines 500Wh Akkus.</p></div>
+        <div class="box"><h2>500 Wh</h2><p>Ist die aktuell gängigste Kapazität eines aktuellen eBike Akkus, was für eine halbevolle Maschinenwäsche bei 40°C reicht.</p></div>
+      `,
+    },
+    {
+      title: "Alles über die Lebensdauer eines Akkus:",
+      content: `
+        <div class="box"><h2>#1</h2><p>Die Lebensdauer eines Akkus hängt vor allem von der Anzahl an Vollladungen ab.</p></div>
+        <div class="box"><h2>500</h2><p>Nach 500 Vollzyklen bietet der Akku ca. 60% der ursprünglichen Kapazität.</p></div>
+        <div class="box"><h2>4-6 Jahre</h2><p>Ist die durchschnittliche Lebenserwartung eines Akkus bei normalem Umgang.</p></div>
+        <div class="box"><h2>🔥</h2><p>Vor allem hohe Temperaturen lassen Akkus schneller altern!</p></div>
+        <div class="box"><h2>🔋</h2><p>Wird ein leerer Akku lange nicht geladen, kann er sich schädlich tiefentladen.</p></div>
+        <div class="box"><h2>⏳</h2><p>Auch wenn der Effekt gering ist: Li-Ionen Zellen altern unaufhaltsam.</p></div>
+      `,
+    },
+    {
+      title: "Die Lithium-Ionen Technologie:",
+      content: `
+        <div class="big-box">
+          <h2>Die Lithium-Ionen Technologie:</h2>
+          <ul>
+            <li>✔ <b>Bekannte Technologie</b> (hauptsächlich bei Mobiltelefonen, Laptops, MP3-Player etc.)</li>
+            <li>✔ <b>Kein Memory-Effekt</b> (Kapazitätsverlust durch häufige Teilentladung, wie bei NiCd)</li>
+            <li>✔ <b>Hohe Energiedichte</b> (mit 150 Wh/kg ist sie dreimal so hoch wie bei NiCd-Batterien)</li>
+            <li>✔ <b>Hohe Lebensdauer</b> (mindestens 500 Volladezyklen)</li>
+            <li>✔ <b>Niedrige Selbstentladung</b> (< 1 % pro Monat)</li>
+            <li>✔ <b>Umweltfreundlich</b> (enthält keine giftigen Substanzen wie Cadmium, Blei oder Quecksilber)</li>
+          </ul>
+        </div>
+      `,
+    },
+    {
+      title: "Technische Definitionen:",
+      content: `
+        <div class="big-box">
+          <h2>Technische Definitionen:</h2>
+          <p><b>Amperestunde (Ah):</b><br>Eine Amperestunde ist die Ladungsmenge, die innerhalb einer Stunde durch einen Leiter fließt, wenn der elektrische Strom konstant 1 Ampere beträgt. Dies ist die eigentliche Angabe für die Ladungsträgerkapazität.</p>
+          <p><b>Wattstunde (Wh):</b><br>Eine Wattstunde entspricht der Energie, die ein System mit einer Leistung von einem Watt in einer Stunde aufnimmt oder abgibt. Dies ergibt sich aus folgender Gleichung:<br>Wattstunden (Wh) = Spannung (V) × Ladungsträgerkapazität (Ah).</p>
+          <p><b>Ein 36 Volt Antriebssystem mit einem 10Ah Akku ergibt eine Kapazität von 360 Wh.</b></p>
+        </div>
+      `,
+    }
+  ];
+
+  let currentSlide = 0;
+
+  function renderSlide() {
+    document.getElementById("page-title").innerHTML = slides[currentSlide].title;
+    document.getElementById("fact-container").innerHTML = slides[currentSlide].content;
+  }
+
+  function changeSlide(direction) {
+    currentSlide += direction;
+    renderSlide();
+  }
+
+  renderSlide();
+</script>
+
+</body>
+</html>

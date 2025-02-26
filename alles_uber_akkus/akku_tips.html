@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akkus Tipps</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      color: #021530;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .tab-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 12px 20px;
+      background: #021530;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .tab.active {
+      background: #13BABC;
+      color: #fff;
+    }
+
+    .tab:hover {
+      background: #0f9a99;
+      transform: scale(1.05);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .content-box {
+      background-color: #021530;
+      color: white;
+      border-radius: 8px;
+      padding: 30px;
+      text-align: left;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+
+    .content-box.active {
+      display: block;
+    }
+
+    .content-box h2 {
+      color: #76CCD9;
+      margin-bottom: 15px;
+    }
+
+    .content-box p {
+      margin-bottom: 1px;
+      margin-top: 1px;
+    }
+
+    .content-box small {
+        color: rgb(185, 185, 185);
+        margin-top: 5px;
+        margin-bottom: 3px;
+    }
+
+    .content-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .content-box ul li {
+      margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .tab-container {
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      
+      .tab {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Akkus Tipps</h1>
+
+<!-- Tabs for navigation -->
+<div class="tab-container">
+  <button class="tab active" onclick="showSlide(0)">Gebrauch</button>
+  <button class="tab" onclick="showSlide(1)">Lagern</button>
+  <button class="tab" onclick="showSlide(2)">Laden</button>
+  <button class="tab" onclick="showSlide(3)">Sicherheit</button>
+</div>
+
+<!-- Content Sections -->
+<div class="container">
+  <div class="content-box active">
+    <h2>5 Tipps für den Gebrauch Ihres Akkus:</h2>
+    <ul>
+      <li>1. Den Akku nicht komplett leer fahren, sondern öfter laden (siehe „Laden“).</li>
+      <li>2. Schützen Sie ihn vor Temperaturen unter 0° und über 40° C.</li>
+      <li>3. Lassen Sie den Akku nicht zu lange ungenutzt (Gefahr der Tiefentladung).</li>
+      <li>4. Bei längerem Nichtgebrauch (z.B. Winter) richtig lagern (siehe „Lagern“).</li>
+      <li>5. Verstauen Sie den Akku beim Transport des eBikes mit dem Auto im Wageninneren.</li>
+    </ul>
+  </div>
+
+  <div class="content-box">
+    <h2>4 Tipps für die optimale Lagerung:</h2>
+    <ul>
+      <li>1. Den Akku in einem trockenen Raum bei gleichmäßiger, kühler Temperatur (ca. 15°C) lagern.</li>
+      <li>2. Ladestand des Akkus bei Einlagerung sollte bei ca. 60% sein.</li>
+      <li>3. Den Akku nicht voll geladen und auf keinen Fall komplett leer lagern.</li>
+      <li>4. Zwischendurch wieder etwas aufladen, den Akku nicht zu lange ungenutzt lassen!</li>
+    </ul>
+  </div>
+
+  <div class="content-box">
+    <h2>Tipps zum richtigen Laden:</h2>
+    <ul>
+      <li><p>Li-Ionen Zellen reagieren sehr empfindlich auf Wärme.</p>
+        <p>Diese entsteht jedoch gerade beim Laden von komplett leeren Akkus durch diedafur notwendigen Ladenstorme.</p>
+      </li>
+      <li><p>1. Laden Sie Ihren Akku daher „flach“.</p>
+      <p>2. Fahren Sie den Akku nicht ganz leer.</p>
+      <p>3. Nehmen Sie ihn beim Laden schon früher vom Ladegerät!</p></li>
+      <li>Damit vermeiden Sie eine unnötige Erwärmung der Zellen, was sich positiv auf die Lebensdauer auswirkt.</li>
+    </ul>
+  </div>
+
+  <div class="content-box">
+    <h2>Wichtige Hinweise zur Akku-Sicherheit:</h2>
+    <ul>
+      <li><p>1. Nutzen Sie ausschließlich das originale Ladegerät vom Hersteller Ihres Akkus!</p>
+            <small>Nur dieses garantiert ein sicheres Laden den Akkus!</small></li>
+      <li><p>2. Öffnen Sie niemals die Batterie!</p>
+            <small>Naben hohen Sicherheitsrisiken erloschen jegliche Garantie- und Gewährleistungsanspruche.</small></li>
+      <li><p>3. Bringen Sie einen defekten Akku umgehend zu Ihrem Händler!</p>
+            <small>Auf gar keinen Fall sollte dieser weiter benutzt, langere Zeit geladert oder geladen werden.</small></li>
+      <li><p>4. Laden Sie den Akku nicht in der Nähe brennbarer Gegenstände!</p>
+            <small>Damit vermeiden Sie Sicherheitsrisiken im ungewohnlichen Fall eines Brandes.</small></li>
+      <li><p>5. Tiefentladene Akkus nicht mehr aufladen!</p>
+            <small>Bringen Sie ihn stattdessen umgehend zu Ihrem Fachhandler.</small></li>
+      <li><p>6. Beachten Sie, dass Akkus nicht im Flugzeug transportiert werden dürfen!</p>
+            <small>Laut internationalem Flugverkehrsverbandes IATA ist seit dem 01.01.2015 der Transport von eBike-Akkus in Passagierflugzeugen verboten!</small></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  function showSlide(index) {
+    // Hide all content boxes
+    let contentBoxes = document.querySelectorAll(".content-box");
+    contentBoxes.forEach((box) => box.classList.remove("active"));
+
+    // Show selected content box
+    contentBoxes[index].classList.add("active");
+
+    // Update active tab
+    let tabs = document.querySelectorAll(".tab");
+    tabs.forEach((tab) => tab.classList.remove("active"));
+    tabs[index].classList.add("active");
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Know-How Navigation</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      color: #021530;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Left Sidebar */
+    .sidebar {
+      width: 250px;
+      background: #021530;
+      color: white;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .sidebar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      font-size: 1.2rem;
+      padding: 10px 0;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .sidebar ul li:hover {
+      color: #76CCD9;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px;
+    }
+
+    /* Main Title */
+    .title {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    /* Category Buttons */
+    .categories {
+      display: flex;
+      gap: 40px; /* More space between buttons */
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .category {
+      width: 180px;
+      text-align: center;
+      background: #76CCD9;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 1.4rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      position: relative;
+    }
+
+    .category:hover {
+      background: #13BABC;
+      transform: scale(1.05);
+    }
+
+    /* Dropdown Styling */
+    .dropdown {
+      display: none;
+      background: white;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      margin-top: 10px;
+      padding: 15px;
+      width: 180px;
+      text-align: center;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+    }
+
+    .dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .dropdown ul li {
+      padding: 12px 0; /* More space between dropdown elements */
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .dropdown ul li:hover {
+      color: #13BABC;
+    }
+
+    /* Dropdown Container for Each Button */
+    .dropdown-container {
+      position: relative;
+    }
+
+    /* Mobile Adjustments */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .sidebar {
+        width: 100%;
+        text-align: center;
+        padding-bottom: 20px;
+      }
+
+      .categories {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Left Sidebar -->
+  <div class="sidebar">
+    <h2>In Verkauf</h2>
+    <ul>
+      <li>City E-Bikes</li>
+      <li>Rennräder</li>
+      <li>Gravel Bikes</li>
+      <li>E-MTBs</li>
+      <li>E-Lastenräder</li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1 class="title">Ultimate Know-How Fahrrad Guide</h1>
+
+    <!-- Category Buttons with Separate Dropdowns -->
+    <div class="categories">
+      <!-- Shifters -->
+      <div class="dropdown-container">
+        <div class="category" onclick="toggleDropdown('shifters')">Shifters</div>
+        <div class="dropdown" id="shifters">
+          <ul>
+            <li>SRAM</li>
+            <li>Campagnolo</li>
+            <li>Shimano</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- E-Bikes -->
+      <div class="dropdown-container">
+        <div class="category" onclick="toggleDropdown('ebikes')">E-Bikes</div>
+        <div class="dropdown" id="ebikes">
+          <ul>
+            <li>Motors</li>
+            <li>Batteries</li>
+            <li>Sensors</li>
+            <li>Autonomy</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Ergonomics -->
+      <div class="dropdown-container">
+        <div class="category" onclick="toggleDropdown('ergonomics')">Ergonomics</div>
+        <div class="dropdown" id="ergonomics">
+          <ul>
+            <li>Handlebar Position</li>
+            <li>Saddle Comfort</li>
+            <li>Riding Posture</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDropdown(id) {
+      // Close all dropdowns first
+      document.querySelectorAll(".dropdown").forEach((el) => {
+        if (el.id !== id) {
+          el.style.display = "none";
+        }
+      });
+
+      // Toggle the selected dropdown
+      const dropdown = document.getElementById(id);
+      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener("click", function(event) {
+      const isDropdown = event.target.closest(".dropdown-container");
+      if (!isDropdown) {
+        document.querySelectorAll(".dropdown").forEach((dropdown) => {
+          dropdown.style.display = "none";
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

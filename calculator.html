@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kreditrechner</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      color: #021530;
+      margin: 0;
+
+      text-align: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px; /* Increased gap between squares */
+      align-items: center;
+    }
+
+    .box {
+      background-color: #021530;
+      color: white;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: left;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px; /* Extra gap */
+    }
+
+    .box h2 {
+      font-size: 1.2rem;
+      margin: 0 0 10px;
+    }
+
+    .input-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 5px;
+    }
+
+    .input-box input {
+      border: none;
+      font-size: 1.4rem;
+      width: 80%;
+      text-align: right;
+      font-weight: bold;
+      color: #021530;
+    }
+
+    .input-box input:focus {
+      outline: none;
+    }
+
+    .edit-button {
+      background-color: #13BABC;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .edit-button:hover {
+      background-color: #0f9a99;
+      transform: scale(1.05);
+    }
+
+    .laufzeit-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .laufzeit-button {
+      background: #ccc;
+      color: #021530;
+      border: none;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 70px;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .laufzeit-button.active {
+      background: #13BABC;
+      color: white;
+    }
+
+    .laufzeit-button:hover {
+      transform: scale(1.05);
+    }
+
+    .result-box {
+      background-color: #021530;
+      color: #13BABC;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 20px; /* Added spacing */
+    }
+
+    .result-box h2 {
+      margin-bottom: 5px;
+    }
+
+    .result-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #76CCD9;
+    }
+
+    .info-text {
+      font-size: 0.9rem;
+      margin-top: 5px;
+      color: #76CCD9;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        display: block;
+      }
+      .box, .result-box {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Kreditrechner</h1>
+
+<div class="container">
+  <!-- Inputs -->
+  <div>
+    <div class="box">
+      <h2>Kaufpreis</h2>
+      <div class="input-box">
+        <input type="number" id="price" value="3999" />
+        <button class="edit-button" onclick="calculate()">ändern</button>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>Zinssatz</h2>
+      <div class="input-box">
+        <input type="number" id="interest" value="3.99" step="0.01" />
+        <button class="edit-button" onclick="calculate()">ändern</button>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>Anzahlung</h2>
+      <div class="input-box">
+        <input type="number" id="downpayment" value="1500" />
+        <button class="edit-button" onclick="calculate()">ändern</button>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>Laufzeit (Monate)</h2>
+      <div class="laufzeit-container">
+        <button class="laufzeit-button active" onclick="setDuration(6)">6</button>
+        <button class="laufzeit-button" onclick="setDuration(12)">12</button>
+        <button class="laufzeit-button" onclick="setDuration(18)">18</button>
+        <button class="laufzeit-button" onclick="setDuration(24)">24</button>
+        <button class="laufzeit-button" onclick="setDuration(36)">36</button>
+        <button class="laufzeit-button" onclick="setDuration(48)">48</button>
+        <button class="laufzeit-button" onclick="setDuration(96)">96</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="result-box">
+    <h2>Ihre monatliche Rate *</h2>
+    <p class="result-value" id="monthlyPayment"></p>
+    <p class="info-text">Zinskosten gesamt: <span id="totalInterest"></span></p>
+  </div>
+</div>
+
+<script>
+  let duration = 6; // Default duration in months
+  calculate();
+
+  function setDuration(value) {
+    duration = value;
+    document.querySelectorAll(".laufzeit-button").forEach(button => button.classList.remove("active"));
+    event.target.classList.add("active");
+    calculate();
+  }
+
+  function calculate() {
+    let price = parseFloat(document.getElementById("price").value);
+    let interestRate = parseFloat(document.getElementById("interest").value) / 100;
+    let downpayment = parseFloat(document.getElementById("downpayment").value);
+
+    let loanAmount = price - downpayment;
+    let monthlyRate = interestRate / 12;
+
+    let monthlyPayment;
+    if (interestRate > 0) {
+      monthlyPayment = (loanAmount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -duration));
+    } else {
+      monthlyPayment = loanAmount / duration;
+    }
+
+    let totalInterest = monthlyPayment * duration - loanAmount;
+
+    document.getElementById("monthlyPayment").innerText = monthlyPayment.toFixed(2) + " €";
+    document.getElementById("totalInterest").innerText = totalInterest.toFixed(2) + " €";
+  }
+</script>
+
+</body>
+</html>

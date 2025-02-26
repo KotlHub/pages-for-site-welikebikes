@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bike Selection</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      color: #021530;
+      margin: 0;
+      padding: 40px 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60vh;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .bike-option {
+      position: relative;
+      flex: 1;
+      text-align: center;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .bike-option img {
+      width: 80%;
+      max-width: 400px;
+      transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    }
+
+    .label {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-top: 10px;
+      padding: 10px;
+      display: inline-block;
+      border-radius: 8px;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    .full-suspension .label {
+      background-color: #13BABC;
+      color: white;
+    }
+
+    .hardtail .label {
+      background-color: #76CCD9;
+      color: white;
+    }
+
+    /* Scroll Effect */
+    .container.full-focus .full-suspension {
+      flex: 2;
+    }
+    .container.full-focus .hardtail {
+      flex: 0.7;
+      opacity: 0.5;
+    }
+
+    .container.hard-focus .hardtail {
+      flex: 2;
+    }
+    .container.hard-focus .full-suspension {
+      flex: 0.7;
+      opacity: 0.5;
+    }
+
+    /* Preference Text */
+    .preference-container {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .preference-text {
+      display: flex;
+      justify-content: space-between;
+      width: 60%;
+      max-width: 400px;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .slider-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .slider {
+      width: 60%;
+      max-width: 400px;
+      appearance: none;
+      height: 8px;
+      background: #ddd;
+      border-radius: 5px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .slider::-webkit-slider-thumb {
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      background: #13BABC;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .slider::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      background: #13BABC;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .bike-option img {
+        width: 70%;
+        max-width: 280px;
+      }
+
+      .preference-text {
+        width: 90%;
+        font-size: 0.9rem;
+      }
+
+      .slider-container {
+        width: 90%;
+      }
+
+      .slider {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h1>Wählen Sie Ihr Bike:</h1>
+
+<div class="container" id="bikeContainer">
+  <div class="bike-option full-suspension">
+    <img src="mtb_bike_xl.svg" alt="Full Suspension">
+    <div class="label">Full Suspension</div>
+  </div>
+  <div class="bike-option hardtail">
+    <img src="road_bike_xl.svg" alt="Hardtail">
+    <div class="label">Hardtail</div>
+  </div>
+</div>
+
+<div class="preference-container">
+  <div class="preference-text">
+    <span>Komfort, Entlastung, Geländegängigkeit</span>
+    <span>Gewicht, Preis, Effizienz</span>
+  </div>
+  
+  <div class="slider-container">
+    <input type="range" min="0" max="100" value="50" class="slider" id="preferenceSlider">
+  </div>
+</div>
+
+<script>
+  const slider = document.getElementById("preferenceSlider");
+  const container = document.getElementById("bikeContainer");
+
+  slider.addEventListener("input", function() {
+    const value = parseInt(this.value);
+    if (value < 40) {
+      container.classList.add("full-focus");
+      container.classList.remove("hard-focus");
+    } else if (value > 60) {
+      container.classList.add("hard-focus");
+      container.classList.remove("full-focus");
+    } else {
+      container.classList.remove("full-focus", "hard-focus");
+    }
+  });
+</script>
+
+</body>
+</html>

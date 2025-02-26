@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rahmengrößenrechner</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      color: #021530;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      padding: 20px;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .header button {
+      background-color: #13BABC;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .header button:hover {
+      background-color: #0f9a99;
+      transform: scale(1.05);
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .left-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .left-section img {
+      width: 75%;
+      height: auto;
+      opacity: 0.8;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .right-section {
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      height: 400px;
+    }
+
+    .right-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .right-content img {
+      width: 80px;
+      height: auto;
+      margin-bottom: 20px;
+      opacity: 0.8;
+      transition: transform 0.3s ease;
+    }
+
+    .slider-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .slider-container label {
+      font-weight: bold;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .slider-container input[type="range"] {
+      width: 200px;
+      margin: 10px 0;
+    }
+
+    .size-output {
+      text-align: center;
+      background-color: #021530;
+      color: #13BABC;
+      border-radius: 5px;
+      padding: 10px;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      min-width: 200px;
+    }
+
+    @media (max-width: 768px) {
+      .main-content {
+        flex-direction: column;
+        align-items: center;
+      }
+      .right-section {
+        width: 90%;
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER with bike-type buttons -->
+  <div class="header">
+    <button onclick="setBikeType('mountainbike')">Mountainbike</button>
+    <button onclick="setBikeType('roadbike')">Rennrad</button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <!-- LEFT: Bike image -->
+    <div class="left-section">
+      <img id="bikeImage" src="https://via.placeholder.com/250x200?text=Bike+Image" alt="Bike Placeholder" />
+    </div>
+
+    <!-- RIGHT: Human silhouette + slider -->
+    <div class="right-section">
+      <div class="right-content">
+        <img id="humanImage" src="human.png" alt="Human Placeholder" />
+
+        <div class="slider-container">
+          <label for="heightSlider">Körpergröße (cm):</label>
+          <input
+            type="range"
+            id="heightSlider"
+            min="150"
+            max="210"
+            value="180"
+            step="1"
+            oninput="updateHeightAndSize()"
+          />
+          <div id="heightValue">180 cm</div>
+        </div>
+
+        <div class="size-output" id="bikeSizeOutput">
+          Rahmenempfehlung: 17-18 Zoll
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  let currentBikeType = 'mountainbike'; // Store selected bike type
+
+  function setBikeType(type) {
+    currentBikeType = type;
+    updateHeightAndSize(); // Refresh the bike image and size immediately
+  }
+
+  function updateHeightAndSize() {
+    const slider = document.getElementById('heightSlider');
+    const heightValue = document.getElementById('heightValue');
+    const bikeSizeOutput = document.getElementById('bikeSizeOutput');
+    const humanImage = document.getElementById('humanImage');
+    const bikeImage = document.getElementById('bikeImage');
+
+    const height = parseInt(slider.value);
+    heightValue.textContent = height + ' cm';
+
+    let sizeText = '';
+    let bikeSize = '';
+
+    if (height <= 160) {
+      sizeText = '42-45 cm (16-17 Zoll)';
+      bikeSize = 'xs';
+    } else if (height <= 170) {
+      sizeText = '46-49 cm (17-18 Zoll)';
+      bikeSize = 's';
+    } else if (height <= 180) {
+      sizeText = '50-53 cm (19-20 Zoll)';
+      bikeSize = 'm';
+    } else if (height <= 190) {
+      sizeText = '54-57 cm (21-22 Zoll)';
+      bikeSize = 'l';
+    } else {
+      sizeText = '58-61 cm (23-24 Zoll)';
+      bikeSize = 'xl';
+    }
+
+    bikeSizeOutput.textContent = 'Rahmenempfehlung: ' + sizeText;
+
+    // Adjust human image size dynamically
+    let newSize = (height - 100) * 1.2;
+    humanImage.style.width = newSize + "px";
+
+    // Change bike image based on selected bike type
+    if (currentBikeType === 'mountainbike') {
+      bikeImage.src = `mtb_bike_${bikeSize}.svg`;
+    } else if (currentBikeType === 'roadbike') {
+      bikeImage.src = `road_bike_${bikeSize}.svg`;
+    }
+  }
+
+  window.onload = function() {
+    updateHeightAndSize();
+  };
+</script>
+
+</body>
+</html>
