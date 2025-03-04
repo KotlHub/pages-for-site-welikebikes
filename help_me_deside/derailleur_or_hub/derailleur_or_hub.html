@@ -47,29 +47,29 @@
       transition: background-color 0.3s ease-in-out;
     }
 
-    .full-suspension .label {
+    .derailleur .label {
       background-color: #13BABC;
       color: white;
     }
 
-    .hardtail .label {
+    .hub .label {
       background-color: #76CCD9;
       color: white;
     }
 
     /* Scroll Effect */
-    .container.full-focus .full-suspension {
+    .container.full-focus .derailleur {
       flex: 2;
     }
-    .container.full-focus .hardtail {
+    .container.full-focus .hub {
       flex: 0.5;
       opacity: 0.5;
     }
 
-    .container.hard-focus .hardtail {
+    .container.hard-focus .hub {
       flex: 2;
     }
-    .container.hard-focus .full-suspension {
+    .container.hard-focus .derailleur {
       flex: 0.5;
       opacity: 0.5;
     }
@@ -143,11 +143,11 @@
       display: none;
     }
 
-    .full-suspension .info-button {
+    .derailleur .info-button {
       left: 15%;
     }
 
-    .hardtail .info-button {
+    .hub .info-button {
       right: 15%;
     }
 
@@ -214,17 +214,17 @@
 <h1>Wählen Sie Ihr Bike:</h1>
 
 <div class="container" id="bikeContainer">
-  <div class="bike-option full-suspension">
-    <img src="full_suspension.svg" alt="Full Suspension">
+  <div class="bike-option derailleur">
+    <img src="derailleur.svg" alt="Full Suspension">
     <br>
     <div class="label">Full Suspension</div>
-    <button class="info-button" id="fullSuspensionBtn" onclick="openModal('fullsuspension')">Mehr Infos</button>
+    <button class="info-button" id="derailleurBtn" onclick="openModal('derailleur')">Mehr Infos</button>
   </div>
-  <div class="bike-option hardtail">
-    <img src="hardtail.svg" alt="Hardtail">
+  <div class="bike-option hub">
+    <img src="hub.svg" alt="hub">
     <br>
-    <div class="label">Hardtail</div>
-    <button class="info-button" id="hardtailBtn" onclick="openModal('hardtail')">Mehr Infos</button>
+    <div class="label">hub</div>
+    <button class="info-button" id="hubBtn" onclick="openModal('hub')">Mehr Infos</button>
   </div>
 </div>
 
@@ -249,15 +249,15 @@
 
 <script>
   const slider = document.getElementById("preferenceSlider");
-const fullSuspension = document.querySelector(".full-suspension");
-const hardtail = document.querySelector(".hardtail");
-const fullSuspensionBtn = document.getElementById("fullSuspensionBtn");
-const hardtailBtn = document.getElementById("hardtailBtn");
+const derailleur = document.querySelector(".derailleur");
+const hub = document.querySelector(".hub");
+const derailleurBtn = document.getElementById("derailleurBtn");
+const hubBtn = document.getElementById("hubBtn");
 
 slider.addEventListener("input", function () {
   const value = parseInt(this.value);
   
-  // Normalize value between -1 (Full Suspension focus) and 1 (Hardtail focus)
+  // Normalize value between -1 (Full Suspension focus) and 1 (hub focus)
   let normalizedValue = (value - 50) / 50;
 
   // Base flex values to keep both sides balanced
@@ -265,22 +265,21 @@ slider.addEventListener("input", function () {
   let flexAdjustment = normalizedValue * 0.75; // Adjust both sides symmetrically
 
   // Apply symmetrical flex values
-  fullSuspension.style.flex = (baseFlex - flexAdjustment).toString();
-  hardtail.style.flex = (baseFlex + flexAdjustment).toString();
+  derailleur.style.flex = (baseFlex - flexAdjustment).toString();
+  hub.style.flex = (baseFlex + flexAdjustment).toString();
 
-  // Adjust opacity dynamically
-
+ 
 
   // Show or hide buttons based on preference
   if (value < 20) {
-    fullSuspensionBtn.style.display = "block";
-    hardtailBtn.style.display = "none";
+    derailleurBtn.style.display = "block";
+    hubBtn.style.display = "none";
   } else if (value > 80) {
-    fullSuspensionBtn.style.display = "none";
-    hardtailBtn.style.display = "block";
+    derailleurBtn.style.display = "none";
+    hubBtn.style.display = "block";
   } else {
-    fullSuspensionBtn.style.display = "none";
-    hardtailBtn.style.display = "none";
+    derailleurBtn.style.display = "none";
+    hubBtn.style.display = "none";
   }
 });
 
@@ -289,10 +288,10 @@ function openModal(type) {
     let title = document.getElementById("modalTitle");
     let text = document.getElementById("modalText");
 
-    if (type === "hardtail") {
-      title.innerText = "Hardtail";
-      text.innerText = "hahaha i'm a hardtail";
-    } else if (type === "fullsuspension") {
+    if (type === "hub") {
+      title.innerText = "hub";
+      text.innerText = "hahaha i'm a hub";
+    } else if (type === "derailleur") {
       title.innerText = "Mehr Infos zur Garantie";
       text.innerText = "hahaha i'm a full suspension";
     }
