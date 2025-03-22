@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin: Konfiguration bearbeiten</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
+    textarea {
+      width: 100%;
+      height: 400px;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 10px;
+      margin-right: 10px;
+      padding: 10px 20px;
+      font-size: 14px;
+      background-color: #00b2b2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .controls {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🛠️ Admin Editor: Konfiguration bearbeiten</h1>
+  <p>Bearbeite oder erweitere die Konfiguration. Änderungen werden in <code>localStorage</code> gespeichert und von <code>client.html</code> genutzt.</p>
+
+  <div class="controls">
+    <button onclick="addService()">➕ Service hinzufügen</button>
+    <button onclick="addCustomerField()">➕ Kundenfeld</button>
+    <button onclick="addBikeField()">➕ Fahrradfeld</button>
+    <button onclick="addProblemField()">➕ Problemfeld</button>
+    <button onclick="saveConfig()">💾 Speichern</button>
+  </div>
+
+  <textarea id="jsonInput"></textarea>
+  <div id="msg" class="message"></div>
+
+  <script>
+    const textarea = document.getElementById('jsonInput');
+    const msg = document.getElementById('msg');
+
+    function loadConfig() {
+      const existing = localStorage.getItem('config');
+      if (existing) {
+        textarea.value = JSON.stringify(JSON.parse(existing), null, 2);
+      } else {
+        textarea.value = JSON.stringify({
+          services: [],
+          calendar: { required: true },
+          customerFields: [],
+          bikeFields: [],
+          problemFields: []
+        }, null, 2);
+      }
+    }
+
+    function saveConfig() {
+      try {
+        const parsed = JSON.parse(textarea.value);
+        localStorage.setItem('config', JSON.stringify(parsed));
+        msg.textContent = '✅ Konfiguration gespeichert. Jetzt client.html neu laden (F5)';
+        msg.style.color = 'green';
+      } catch (e) {
+        msg.textContent = '❌ Fehler im JSON: ' + e.message;
+        msg.style.color = 'red';
+      }
+    }
+
+    function addService() {
+      try {
+        const config = JSON.parse(textarea.value);
+        const name = prompt('Service-Name?');
+        const id = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+        const duration = parseInt(prompt('Dauer in Minuten?'), 10);
+        config.services.push({ id, name, duration, fields: [] });
+        textarea.value = JSON.stringify(config, null, 2);
+      } catch (e) {
+        alert('Fehler beim Hinzufügen: ' + e.message);
+      }
+    }
+
+    function addCustomerField() {
+      addField('customerFields');
+    }
+
+    function addBikeField() {
+      addField('bikeFields');
+    }
+
+    function addProblemField() {
+      addField('problemFields');
+    }
+
+    function addField(section) {
+      try {
+        const config = JSON.parse(textarea.value);
+        const label = prompt('Feld-Label?');
+        const type = prompt('Typ (text, email, tel, textarea, file, checkbox)?');
+        const required = confirm('Erforderlich?');
+        const field = { label, type, required };
+
+        if (type === 'file') {
+          field.accept = prompt('Accept-Attribut (z.B. application/pdf)') || '';
+        }
+
+        config[section].push(field);
+        textarea.value = JSON.stringify(config, null, 2);
+      } catch (e) {
+        alert('Fehler beim Hinzufügen: ' + e.message);
+      }
+    }
+
+    loadConfig();
+  </script>
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>We Like Bikes Terminbuchung</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 40px;
+      background-color: #fff;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .section {
+      margin-top: 40px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 6px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+    .service-card {
+      border: 2px solid #00b2b2;
+      border-radius: 6px;
+      padding: 15px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .service-card input[type="radio"] {
+      accent-color: #00b2b2;
+      width: 18px;
+      height: 18px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Terminbuchung</h1>
+  <form id="bookingForm"></form>
+
+  <script>
+    const config = JSON.parse(localStorage.getItem('config'));
+    if (!config) {
+      document.getElementById('bookingForm').innerHTML = '<p style="color:red">⚠️ Keine Konfiguration gefunden. Bitte zuerst in admin.html speichern.</p>';
+    } else {
+      renderForm(config);
+    }
+
+    function renderForm(config) {
+      const form = document.getElementById('bookingForm');
+
+      function createInput(field, namePrefix = '') {
+        const group = document.createElement('div');
+        group.className = 'form-group';
+        const label = document.createElement('label');
+        label.textContent = field.label + (field.required ? ' *' : '');
+        group.appendChild(label);
+
+        let input;
+
+        if (field.type === 'textarea') {
+          input = document.createElement('textarea');
+        } else if (field.type === 'file') {
+          input = document.createElement('input');
+          input.type = 'file';
+          if (field.accept) input.accept = field.accept;
+        } else if (field.type === 'checkbox') {
+          input = document.createElement('input');
+          input.type = 'checkbox';
+
+          const subGroup = document.createElement('div');
+          subGroup.className = 'hidden';
+          let subfields = [];
+
+          if (field.subfields) {
+            subfields = field.subfields.map(sub => {
+              const subEl = createInput(sub, namePrefix + field.label + '_');
+              subGroup.appendChild(subEl);
+              return subEl.querySelector('input, textarea');
+            });
+            group.appendChild(subGroup);
+          }
+
+          input.addEventListener('change', () => {
+            subGroup.classList.toggle('hidden', !input.checked);
+            subfields.forEach(f => f.required = input.checked);
+          });
+        } else {
+          input = document.createElement('input');
+          input.type = field.type;
+        }
+
+        input.name = namePrefix + field.label;
+        if (field.required) input.required = true;
+        group.appendChild(input);
+
+        return group;
+      }
+
+      // Services section
+      const serviceSection = document.createElement('div');
+      serviceSection.className = 'section';
+      const serviceTitle = document.createElement('h3');
+      serviceTitle.textContent = '🛎️ Dienst auswählen';
+      serviceSection.appendChild(serviceTitle);
+      config.services.forEach(service => {
+        const card = document.createElement('label');
+        card.className = 'service-card';
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'selectedService';
+        input.value = service.id;
+        input.required = true;
+        card.appendChild(input);
+        const info = document.createElement('span');
+        info.textContent = service.name + ' (' + service.duration + ' Minuten)';
+        card.appendChild(info);
+        serviceSection.appendChild(card);
+      });
+      form.appendChild(serviceSection);
+
+      // Kalender
+      if (config.calendar?.required) {
+        const calendarSection = document.createElement('div');
+        calendarSection.className = 'section';
+        const title = document.createElement('h3');
+        title.textContent = '📅 Datum und Uhrzeit';
+        calendarSection.appendChild(title);
+        calendarSection.appendChild(createInput({
+          label: 'Termin',
+          type: 'datetime-local',
+          required: true
+        }));
+        form.appendChild(calendarSection);
+      }
+
+      // Allgemeine Sektionen
+      const sections = [
+        ['👤 Kundendaten', config.customerFields],
+        ['🚲 Fahrraddaten', config.bikeFields],
+        ['🛠️ Problem', config.problemFields]
+      ];
+      sections.forEach(([titleText, fields]) => {
+        const section = document.createElement('div');
+        section.className = 'section';
+        const title = document.createElement('h3');
+        title.textContent = titleText;
+        section.appendChild(title);
+        fields.forEach(field => section.appendChild(createInput(field)));
+        form.appendChild(section);
+      });
+
+      // Spezifische Felder pro Service
+      const serviceFieldsSection = document.createElement('div');
+      serviceFieldsSection.className = 'section';
+      serviceFieldsSection.id = 'serviceFields';
+      const serviceFieldsTitle = document.createElement('h3');
+      serviceFieldsTitle.textContent = '📌 Servicespezifische Felder';
+      serviceFieldsSection.appendChild(serviceFieldsTitle);
+      form.appendChild(serviceFieldsSection);
+
+      form.addEventListener('change', e => {
+        if (e.target.name === 'selectedService') {
+          const selected = config.services.find(s => s.id === e.target.value);
+          serviceFieldsSection.innerHTML = '<h3>📌 Servicespezifische Felder</h3>';
+          if (selected.fields) {
+            selected.fields.forEach(field => {
+              serviceFieldsSection.appendChild(createInput(field, 'service_' + selected.id + '_'));
+            });
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>

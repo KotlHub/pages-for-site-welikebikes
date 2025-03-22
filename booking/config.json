@@ -1,0 +1,55 @@
+{
+    "services": [
+      {
+        "id": "vanmoof",
+        "name": "Vanmoof: Service und Garantie",
+        "duration": 30,
+        "fields": [
+          { "label": "Repair Mode", "type": "text", "required": true }
+        ]
+      },
+      {
+        "id": "canyon",
+        "name": "Canyon: Service und Garantie",
+        "duration": 15,
+        "fields": [
+          { "label": "Canyon Kundennummer", "type": "text", "required": true }
+        ]
+      }
+    ],
+    "calendar": {
+      "required": true
+    },
+    "customerFields": [
+        { "label": "Vor- und Nachname", "type": "text", "required": true },
+        { "label": "E-Mail", "type": "email", "required": true },
+        { "label": "Adresse", "type": "text", "required": true },
+        { "label": "ZIP Code", "type": "text", "required": true },
+        { "label": "Telefonnummer", "type": "tel", "required": true }
+    ],
+    "bikeFields": [
+      { "label": "Fahrradhersteller", "type": "text", "required": true },
+      { "label": "Fahrradmodell", "type": "text", "required": true },
+      { "label": "Farbe", "type": "text", "required": true },
+      { "label": "Rahmennummer", "type": "text", "required": true },
+      {
+        "label": "Leasing?",
+        "type": "checkbox",
+        "subfields": [
+          { "label": "Leasingfirma", "type": "text", "required": true },
+          { "label": "Vertragsnummer", "type": "text", "required": true }
+        ]
+      },
+      {
+        "label": "Garantie?",
+        "type": "checkbox",
+        "subfields": [
+          { "label": "Originalrechnung (PDF)", "type": "file", "required": true, "accept": "application/pdf" }
+        ]
+      }
+    ],
+    "problemFields": [
+      { "label": "Kurze Beschreibung des Problems", "type": "textarea", "required": true }
+    ]
+  }
+  

@@ -11,8 +11,19 @@
       color: #021530;
       margin: 0;
       padding: 0;
-      display: flex;
+
       height: 100vh;
+    }
+
+    button {
+      --border-opacity: 0px;
+    }
+    button:hover{
+      --border-opacity: 0px;
+    }
+
+    a {
+      text-decoration: none;
     }
 
     /* Left Sidebar */
@@ -87,6 +98,7 @@
     .category:hover {
       background: #13BABC;
       transform: scale(1.05);
+      --border-opacity: 0px;
     }
 
     /* Dropdown Styling */
@@ -172,7 +184,7 @@
 <body>
 
   <!-- Left Sidebar -->
-  <div class="sidebar">
+  <!-- <div class="sidebar">
     <h2>In Verkauf</h2>
     <ul>
       <li>City E-Bikes</li>
@@ -181,7 +193,7 @@
       <li>E-MTBs</li>
       <li>E-Lastenräder</li>
     </ul>
-  </div>
+  </div> -->
 
   <!-- Main Content -->
   <div class="main-content">
@@ -191,7 +203,8 @@
     <div class="categories">
       <!-- Shifters -->
       <div class="dropdown-container">
-        <div class="category" onclick="toggleDropdown('shifters')">Shifters</div>
+        <!-- <div class="category" onclick="toggleDropdown('shifters')">Shifters</div> -->
+        <button onclick="location.href='shifters'" class="category">Shifters</button>
         <div class="dropdown" id="shifters">
           <ul>
             <li>SRAM</li>
@@ -207,7 +220,7 @@
         <div class="dropdown" id="ebikes">
           <ul>
             <li>Motors</li>
-            <li>Batteries</li>
+            <li onclick="location.href='alles-uber-akkus'">Batteries</li>
             <li>Sensors</li>
             <li>Autonomy</li>
           </ul>
