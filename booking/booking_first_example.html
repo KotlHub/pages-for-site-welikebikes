@@ -15,6 +15,10 @@
       text-align: center;
       margin-bottom: 30px;
     }
+    p {
+      text-align: center;
+      margin-bottom: 30px;
+    }
     .section {
       margin-top: 40px;
     }
@@ -55,7 +59,9 @@
 </head>
 <body>
   <h1>Terminbuchung</h1>
+  <p>How I see the booking process in cycly</p>
   <form id="bookingForm"></form>
+  <p>After filling all the required fields, the customer presses the button and the new appointment appears in cycly calendar</p>
 
   <script>
     const config = JSON.parse(localStorage.getItem('config'));
@@ -121,7 +127,10 @@
       serviceSection.className = 'section';
       const serviceTitle = document.createElement('h3');
       serviceTitle.textContent = '🛎️ Dienst auswählen';
+      const serviceReq = document.createElement('p');
+      serviceReq.textContent = 'Requirement: we have to be able to add new services and delete them. Also the price must be hidden.';
       serviceSection.appendChild(serviceTitle);
+      serviceSection.appendChild(serviceReq);
       config.services.forEach(service => {
         const card = document.createElement('label');
         card.className = 'service-card';
@@ -132,11 +141,50 @@
         input.required = true;
         card.appendChild(input);
         const info = document.createElement('span');
-        info.textContent = service.name + ' (' + service.duration + ' Minuten)';
+        info.textContent = service.name;
         card.appendChild(info);
         serviceSection.appendChild(card);
       });
       form.appendChild(serviceSection);
+
+      // Garantie und Bei WLB gekauft Checkboxen
+      const extraSection = document.createElement('div');
+extraSection.className = 'section';
+
+const extraTitle = document.createElement('h3');
+extraTitle.textContent = '✅ Zusatzoptionen';
+const extraNote = document.createElement('p');
+extraNote.textContent = 'Requirement: For some brands we do warranty service only if the customer has bought the bike from us. We have to be able to choose if we do warranty service or not during implementing the new service. For example, for Tenways we dont do warranty if the customer bought the bike in another sho, but for rose and canyon we do warranty service in any case.';
+const extraNote2 = document.createElement('p');
+extraNote2.textContent = 'That means that if customer wants to book a service for any brand that we dont do warranty service, we have to ask him if he bought the bike from us or not. If he did, we do warranty service, if not, show the message on the screen that it is no sense to book an appointment in our store.';
+extraSection.appendChild(extraTitle);
+extraSection.appendChild(extraNote);
+extraSection.appendChild(extraNote2);
+
+const garantieGroup = document.createElement('div');
+garantieGroup.className = 'form-group';
+const garantieLabel = document.createElement('label');
+const garantieCheckbox = document.createElement('input');
+garantieCheckbox.type = 'checkbox';
+garantieCheckbox.name = 'garantie';
+garantieLabel.appendChild(garantieCheckbox);
+garantieLabel.append(' Garantie');
+garantieGroup.appendChild(garantieLabel);
+
+const wlbGroup = document.createElement('div');
+wlbGroup.className = 'form-group';
+const wlbLabel = document.createElement('label');
+const wlbCheckbox = document.createElement('input');
+wlbCheckbox.type = 'checkbox';
+wlbCheckbox.name = 'beiWLB';
+wlbLabel.appendChild(wlbCheckbox);
+wlbLabel.append(' Bei WLB gekauft');
+wlbGroup.appendChild(wlbLabel);
+
+extraSection.appendChild(garantieGroup);
+extraSection.appendChild(wlbGroup);
+form.appendChild(extraSection);
+
 
       // Kalender
       if (config.calendar?.required) {
@@ -144,7 +192,10 @@
         calendarSection.className = 'section';
         const title = document.createElement('h3');
         title.textContent = '📅 Datum und Uhrzeit';
+        const calendarReq = document.createElement('p');
+        calendarReq.textContent = 'Requirement: we have to be able to choose the amount of appointments per day (for example: 3 appointments for vanmoof, 3 appointments for canyon etc.) and create blockers whatever time we want (for example: we want to close the store 3 hours earlier on 15th of April because we are going to have a team meeting, so we want to book that time for us).';
         calendarSection.appendChild(title);
+        calendarSection.appendChild(calendarReq);
         calendarSection.appendChild(createInput({
           label: 'Termin',
           type: 'datetime-local',
@@ -155,16 +206,19 @@
 
       // Allgemeine Sektionen
       const sections = [
-        ['👤 Kundendaten', config.customerFields],
-        ['🚲 Fahrraddaten', config.bikeFields],
-        ['🛠️ Problem', config.problemFields]
+        ['👤 Kundendaten', config.customerFields, 'Requirement: these fields exist already in cycly and customers are required to fill them because it is important data for us.'],
+        ['🚲 Fahrraddaten', config.bikeFields, 'Requirement: these fields exist already in cycly and customers are required to fill them because it is important data for us.'],
+        ['🛠️ Problem', config.problemFields, 'Requirement: this field goes to Bemerkungen zum Auftrag. (for example: customer says "i want service before summer season, new chain and brake pads" and this text appears automatically in Bemerkungen zum Auftrag).']
       ];
-      sections.forEach(([titleText, fields]) => {
+      sections.forEach(([titleText, fields, requirement]) => {
         const section = document.createElement('div');
         section.className = 'section';
         const title = document.createElement('h3');
         title.textContent = titleText;
+        const note = document.createElement('p');
+        note.textContent = requirement;
         section.appendChild(title);
+        section.appendChild(note);
         fields.forEach(field => section.appendChild(createInput(field)));
         form.appendChild(section);
       });
@@ -175,13 +229,17 @@
       serviceFieldsSection.id = 'serviceFields';
       const serviceFieldsTitle = document.createElement('h3');
       serviceFieldsTitle.textContent = '📌 Servicespezifische Felder';
+      const serviceFieldsNote = document.createElement('p');
+      serviceFieldsNote.textContent = 'Requirement: for every service that we create, we have to be able to add the specific fields that customer is required to fill (for example: for vanmoof - repair mode and pass code; for rose - Kundennumer, Auftragsnummer and Lieferdatum etc.). These fields also go to Bemerkungen zum Auftrag.';
       serviceFieldsSection.appendChild(serviceFieldsTitle);
+      serviceFieldsSection.appendChild(serviceFieldsNote);
       form.appendChild(serviceFieldsSection);
 
       form.addEventListener('change', e => {
         if (e.target.name === 'selectedService') {
           const selected = config.services.find(s => s.id === e.target.value);
           serviceFieldsSection.innerHTML = '<h3>📌 Servicespezifische Felder</h3>';
+          serviceFieldsSection.appendChild(serviceFieldsNote);
           if (selected.fields) {
             selected.fields.forEach(field => {
               serviceFieldsSection.appendChild(createInput(field, 'service_' + selected.id + '_'));
