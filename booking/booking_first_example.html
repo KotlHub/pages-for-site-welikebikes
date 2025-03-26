@@ -60,6 +60,8 @@
 <body>
   <h1>Terminbuchung</h1>
   <p>How I see the booking process in cycly</p>
+  <p>The booking process must be as flexible as possible. We have to be able to set up the booking process as we wish and not to contact cycly support if we want to make changes</p>
+  <p>To this page I attach the diagram with the booking process visualisation, so you can imagine yourself in the customer's skin during making an appointment</p>
   <form id="bookingForm"></form>
   <p>After filling all the required fields, the customer presses the button and the new appointment appears in cycly calendar</p>
 
@@ -154,7 +156,7 @@ extraSection.className = 'section';
 const extraTitle = document.createElement('h3');
 extraTitle.textContent = '✅ Zusatzoptionen';
 const extraNote = document.createElement('p');
-extraNote.textContent = 'Requirement: For some brands we do warranty service only if the customer has bought the bike from us. We have to be able to choose if we do warranty service or not during implementing the new service. For example, for Tenways we dont do warranty if the customer bought the bike in another sho, but for rose and canyon we do warranty service in any case.';
+extraNote.textContent = 'Requirement: For some brands we do warranty service only if the customer has bought the bike from us. We have to be able to choose if we do warranty service or not during implementing the new service. For example, for Tenways we dont do warranty if the customer bought the bike in another shop, but for rose and canyon we do warranty service in any case.';
 const extraNote2 = document.createElement('p');
 extraNote2.textContent = 'That means that if customer wants to book a service for any brand that we dont do warranty service, we have to ask him if he bought the bike from us or not. If he did, we do warranty service, if not, show the message on the screen that it is no sense to book an appointment in our store.';
 extraSection.appendChild(extraTitle);
