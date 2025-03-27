@@ -211,19 +211,19 @@
 </head>
 <body>
 
-<h1>Wählen Sie Ihr Bike:</h1>
+<h1>Wählen Sie Ihr Schaltung:</h1>
 
 <div class="container" id="bikeContainer">
   <div class="bike-option derailleur">
-    <img src="derailleur.svg" alt="Full Suspension">
+    <img src="https://cdn.shopify.com/s/files/1/0645/8933/2716/files/derailleur.svg?v=1743088036" alt="Full Suspension">
     <br>
-    <div class="label">Full Suspension</div>
+    <div class="label">Derailleur</div>
     <button class="info-button" id="derailleurBtn" onclick="openModal('derailleur')">Mehr Infos</button>
   </div>
   <div class="bike-option hub">
-    <img src="hub.svg" alt="hub">
+    <img src="https://cdn.shopify.com/s/files/1/0645/8933/2716/files/hub.svg?v=1743088036" alt="hub">
     <br>
-    <div class="label">hub</div>
+    <div class="label">Hub</div>
     <button class="info-button" id="hubBtn" onclick="openModal('hub')">Mehr Infos</button>
   </div>
 </div>
@@ -284,20 +284,21 @@ slider.addEventListener("input", function () {
 });
 
 function openModal(type) {
-    let modal = document.getElementById("infoModal");
-    let title = document.getElementById("modalTitle");
-    let text = document.getElementById("modalText");
+  let modal = document.getElementById("infoModal");
+  let title = document.getElementById("modalTitle");
+  let text = document.getElementById("modalText");
 
-    if (type === "hub") {
-      title.innerText = "hub";
-      text.innerText = "hahaha i'm a hub";
-    } else if (type === "derailleur") {
-      title.innerText = "Mehr Infos zur Garantie";
-      text.innerText = "hahaha i'm a full suspension";
-    }
-
-    modal.style.display = "flex";
+  if (type === "hub") {
+    title.innerText = "Nabenschaltung";
+    text.innerText = "Aufgrund der geschlossenen, wasser- und staubdichten Bauweise ist das Getriebe einer Nabenschaltung gut geschützt. Daher sind Nabenschaltungen sehr zuverlässig. Auch die Einstellung einer Schaltungsnabe ist deutlich einfacher und weniger anfällig als bei einer Kettenschaltung. Die geschlossene Bauweise geht allerdings auf Kosten der Leichtgängigkeit, da das Getriebe höhere Reibungswiderstände verursacht. Darüber hinaus bieten Nabenschaltungen bauartbedingt deutlich weniger und gröber abgestimmte Gänge. Dies ist nachteilig für längere und bergige Touren.\n\nFazit: Nabenschaltungen sind praktisch wartungsfrei und sehr leicht einzustellen. Das macht sie ideal für urbane Anwendungen oder für die tägliche Fahrt in die Arbeit, wenn die Zuverlässigkeit eine zentrale Rolle spielt. Für längere, bergigere Strecken sind Kettenschaltungen geeigneter.";
+  } else if (type === "derailleur") {
+    title.innerText = "Kettenschaltung";
+    text.innerText = "Anders als Nabenschaltungen haben Kettenschaltungen kein internes widerstandsbehaftetes Getriebe und laufen dadurch deutlich leichter. Durch die offene Bauweise können Kettengangschaltungen mehr Gänge schalten, was zu einer deutlich größeren und feiner abgestimmten Übersetzungsbreite führt. Da Kettenschaltungen offen sind, sind sie anfälliger für mechanische Beschädigungen, Witterungseinflüsse oder Staub und Salz. Kettenschaltungen stellen ebenfalls eine höhere Belastung für die Kette dar, da sich diese für den Wechsel von einem Zahnkranz zum anderen seitlich bewegen können muss.\n\nFazit: Kettenschaltungen sind überall dort ideal, wo viele und fein abgestimmte Gänge gebraucht werden. Dies trifft vor allem auf sportliche Bikes und Fahrräder für Touren und bergige Strecken zu.";
   }
+
+  modal.style.display = "flex";
+}
+
 
   function closeModal() {
     document.getElementById("infoModal").style.display = "none";

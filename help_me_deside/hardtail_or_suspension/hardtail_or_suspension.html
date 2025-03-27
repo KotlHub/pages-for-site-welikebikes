@@ -215,13 +215,13 @@
 
 <div class="container" id="bikeContainer">
   <div class="bike-option full-suspension">
-    <img src="full_suspension.svg" alt="Full Suspension">
+    <img src="https://cdn.shopify.com/s/files/1/0645/8933/2716/files/full_suspension.svg?v=1741439602" alt="Full Suspension">
     <br>
     <div class="label">Full Suspension</div>
     <button class="info-button" id="fullSuspensionBtn" onclick="openModal('fullsuspension')">Mehr Infos</button>
   </div>
   <div class="bike-option hardtail">
-    <img src="hardtail.svg" alt="Hardtail">
+    <img src="https://cdn.shopify.com/s/files/1/0645/8933/2716/files/hardtail.svg?v=1741439604" alt="Hardtail">
     <br>
     <div class="label">Hardtail</div>
     <button class="info-button" id="hardtailBtn" onclick="openModal('hardtail')">Mehr Infos</button>
@@ -285,20 +285,22 @@ slider.addEventListener("input", function () {
 });
 
 function openModal(type) {
-    let modal = document.getElementById("infoModal");
-    let title = document.getElementById("modalTitle");
-    let text = document.getElementById("modalText");
+  let modal = document.getElementById("infoModal");
+  let title = document.getElementById("modalTitle");
+  let text = document.getElementById("modalText");
 
-    if (type === "hardtail") {
-      title.innerText = "Hardtail";
-      text.innerText = "hahaha i'm a hardtail";
-    } else if (type === "fullsuspension") {
-      title.innerText = "Mehr Infos zur Garantie";
-      text.innerText = "hahaha i'm a full suspension";
-    }
-
-    modal.style.display = "flex";
+  if (type === "hardtail") {
+    title.innerText = "Hardtail";
+    text.innerText = "Anders als der vollgefederte Rahmen besitzt der starre Hinterbau eines Hardtails keine beweglichen Bauteile. Damit wird er nicht nur leichter, sondern auch günstiger, da beispielsweise das Gewicht für Lager oder Lagersitze entfällt und weniger Bauteile gefertigt und montiert werden müssen. Starre Hinterbauten vermeiden darüber hinaus den Energieverlust durch das Eintauchen der Hinterbaufederung bei starkem Treten, wie beim Wiegetritt. Daher gelten Hardtails als effizienter.\n\nFazit: Hardtails sind eine gute Wahl, wenn Effizienz und Leichtigkeit und / oder der Preise eine zentrale Rolle spielen. Für längere Touren und härteres Gelände sind allerdings vollgefederte Rahmen geeigneter!";
+  } else if (type === "fullsuspension") {
+    title.innerText = "Full-Suspension";
+    text.innerText = "Ein vollgefederter Rahmen bietet deutlich mehr Komfort als ein Hardtail-Rahmen, da er Stöße und Vibrationen absorbiert. Das entlastet den Fahrer, da er diese Stöße sonst selbst abfedern müsste. Gerade auf längeren Touren macht sich dies deutlich bemerkbar. Die Hinterbau-Federung sorgt darüber hinaus für einen besseren Bodenkontakt des antreibenden Hinterrades. Dies wirkt sich nicht nur positiv auf den Antrieb, sondern auch auf die Bremswirkung aus, da das Hinterrad nicht zum Überspringen von Hindernissen neigt. Insgesamt wird das Bike durch die Hinterbaufederung sicherer und deutlich geländetauglicher.\n\nFazit: Vollgefederte Rahmen sind daher die ideale Wahl für längere Touren und härteres Gelände. Wenn Gewicht, Preis oder Effizienz im Vordergrund steht, empfiehlt sich ein Hardtail.";
   }
+
+  modal.style.display = "flex";
+}
+
+
 
   function closeModal() {
     document.getElementById("infoModal").style.display = "none";
