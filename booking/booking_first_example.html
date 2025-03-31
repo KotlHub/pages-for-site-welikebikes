@@ -130,7 +130,7 @@
       const serviceTitle = document.createElement('h3');
       serviceTitle.textContent = '🛎️ Dienst auswählen';
       const serviceReq = document.createElement('p');
-      serviceReq.textContent = 'Requirement: we have to be able to add new services and delete them. Also the price must be hidden.';
+      serviceReq.textContent = 'Requirement: we have to be able to add new services, edit (name, amount per day and frequency) and delete them at any time we want. Also the price must be hidden.';
       serviceSection.appendChild(serviceTitle);
       serviceSection.appendChild(serviceReq);
       config.services.forEach(service => {
@@ -158,7 +158,7 @@ extraTitle.textContent = '✅ Zusatzoptionen';
 const extraNote = document.createElement('p');
 extraNote.textContent = 'Requirement: For some brands we do warranty service only if the customer has bought the bike from us. We have to be able to choose if we do warranty service or not during implementing the new service. For example, for Tenways we dont do warranty if the customer bought the bike in another shop, but for rose and canyon we do warranty service in any case.';
 const extraNote2 = document.createElement('p');
-extraNote2.textContent = 'That means that if customer wants to book a service for any brand that we dont do warranty service, we have to ask him if he bought the bike from us or not. If he did, we do warranty service, if not, show the message on the screen that it is no sense to book an appointment in our store.';
+extraNote2.textContent = 'That means that if customer wants to book a service for any brand that we dont do warranty service, we have to ask him if he bought the bike from us or not. If he did, we do warranty service, if not, show the message on the screen that it is no sense to book an appointment in our store. (check the diagram for more details).';
 extraSection.appendChild(extraTitle);
 extraSection.appendChild(extraNote);
 extraSection.appendChild(extraNote2);
@@ -172,6 +172,26 @@ garantieCheckbox.name = 'garantie';
 garantieLabel.appendChild(garantieCheckbox);
 garantieLabel.append(' Garantie');
 garantieGroup.appendChild(garantieLabel);
+
+const garantieFileGroup = document.createElement('div');
+garantieFileGroup.className = 'form-group hidden';
+garantieFileGroup.id = 'garantieFileGroup';
+const garantieFileLabel = document.createElement('label');
+garantieFileLabel.textContent = 'Garantie-Nachweis (PDF)';
+const garantieFileInput = document.createElement('input');
+garantieFileInput.type = 'file';
+garantieFileInput.accept = 'application/pdf';
+garantieFileInput.name = 'garantieFile';
+garantieFileInput.required = false;
+garantieFileGroup.appendChild(garantieFileLabel);
+garantieFileGroup.appendChild(garantieFileInput);
+extraSection.appendChild(garantieFileGroup);
+
+// Checkbox Event: Show PDF input if checked
+garantieCheckbox.addEventListener('change', () => {
+  garantieFileGroup.classList.toggle('hidden', !garantieCheckbox.checked);
+  garantieFileInput.required = garantieCheckbox.checked;
+});
 
 const wlbGroup = document.createElement('div');
 wlbGroup.className = 'form-group';
@@ -195,9 +215,12 @@ form.appendChild(extraSection);
         const title = document.createElement('h3');
         title.textContent = '📅 Datum und Uhrzeit';
         const calendarReq = document.createElement('p');
-        calendarReq.textContent = 'Requirement: we have to be able to choose the amount of appointments per day (for example: 3 appointments for vanmoof, 3 appointments for canyon etc.) and create blockers whatever time we want (for example: we want to close the store 3 hours earlier on 15th of April because we are going to have a team meeting, so we want to book that time for us).';
+        calendarReq.textContent = 'Requirement: we have to be able to choose the amount of appointments per day (for example: 3 appointments for vanmoof, 3 appointments for canyon etc.), frequency of the appointment (for example: every 15 minutes for canyon and every 45 minutes for Vanmoof) and create blockers whatever time we want (for example: we want to close the store 3 hours earlier on 15th of April because we are going to have a team meeting, so we want to book that time for us).';
+        const calendarReq2 = document.createElement('p');
+        calendarReq2.textContent = 'If the appiontment is not avaliable on the chosen date, show the closest date and time that is avaliable for booking.';
         calendarSection.appendChild(title);
         calendarSection.appendChild(calendarReq);
+        calendarSection.appendChild(calendarReq2);
         calendarSection.appendChild(createInput({
           label: 'Termin',
           type: 'datetime-local',
