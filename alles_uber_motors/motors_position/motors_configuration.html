@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motor Positionen</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      color: #021530;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .container { display: flex; width: 100%; height: 100vh; }
+    .left-section {
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    .left-section img {
+      width: 80%;
+      max-width: 600px;
+      height: auto;
+    }
+    .button-group {
+      display: flex;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .button {
+      background-color: #ccc;
+      color: #021530;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .button.active { background-color: #13BABC; color: white; }
+    .button:hover {
+      background-color: #0f9a99;
+      transform: scale(1.05);
+    }
+    .right-section {
+      width: 35%;
+      height: 100vh;
+      background-color: #021530;
+      color: white;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: fixed;
+      right: 0;
+      top: 0;
+    }
+    .right-section h2 {
+      color: #76CCD9;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    .right-section .description-text {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .highlight-green {
+      color: #13BABC;
+      font-weight: bold;
+      display: block;
+    }
+    .highlight-red {
+      color: #D9534F;
+      font-weight: bold;
+      display: block;
+    }
+    @media (max-width: 1024px) {
+      body { overflow: auto; }
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .right-section {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 30px;
+      }
+      .left-section {
+        width: 100%;
+        padding: 20px;
+      }
+      .button-group {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left-section">
+      <img id="bikeImage" src="https://cdn.shopify.com/s/files/1/0645/8933/2716/files/motor_rear.svg?v=1743505837.svg" alt="Bike Image" />
+      <div class="button-group">
+        <button class="button active" onclick="updateContent('rear')">Heckmotor</button>
+        <button class="button" onclick="updateContent('mid')">Mittelmotor</button>
+        <button class="button" onclick="updateContent('front')">Frontmotor</button>
+      </div>
+    </div>
+    <div class="right-section" id="infoSection">
+      <h2 id="motorTitle">Heckmotor</h2>
+      <p id="motorDescription" class="description-text">
+        Der Motor ist in der Hinterradnabe integriert und sorgt für ein natürliches Fahrgefühl beim Treten.
+      </p>
+      <div id="motorDetails">
+        <span class="highlight-green">✔ Gute Traktion bei Steigungen</span>
+        <span class="highlight-green">✔ Leiser Betrieb</span>
+        <span class="highlight-green">✔ Unterstützt sportliches Fahrverhalten</span>
+        <br>
+        <span class="highlight-red">✘ Schwieriger Reifenwechsel</span>
+        <span class="highlight-red">✘ Weniger geeignet für Offroad</span>
+        <span class="highlight-red">✘ Komplizierter bei Wartung der Schaltung (bei Nabenschaltung)</span>
+      </div>
+    </div>
+  </div>
+<script>
+  function updateContent(type) {
+    const title = document.getElementById("motorTitle");
+    const description = document.getElementById("motorDescription");
+    const detailsContainer = document.getElementById("motorDetails");
+    const bikeImage = document.getElementById("bikeImage");
+
+    document.querySelectorAll(".button").forEach(btn => btn.classList.remove("active"));
+    event.target.classList.add("active");
+
+    let descText = "";
+    let details = "";
+    let imageSrc = "";
+
+    if (type === "rear") {
+      title.innerText = "Heckmotor";
+      descText = "Der Motor ist in der Hinterradnabe integriert und sorgt für ein natürliches Fahrgefühl beim Treten.";
+      details = `
+        <span class="highlight-green">✔ Gute Traktion bei Steigungen</span>
+        <span class="highlight-green">✔ Leiser Betrieb</span>
+        <span class="highlight-green">✔ Unterstützt sportliches Fahrverhalten</span>
+        <br>
+        <span class="highlight-red">✘ Schwieriger Reifenwechsel</span>
+        <span class="highlight-red">✘ Weniger geeignet für Offroad</span>
+        <span class="highlight-red">✘ Komplizierter bei Wartung der Schaltung (bei Nabenschaltung)</span>`;
+      imageSrc = "https://cdn.shopify.com/s/files/1/0645/8933/2716/files/motor_rear.svg?v=1743505837.svg";
+    } else if (type === "mid") {
+      title.innerText = "Mittelmotor";
+      descText = "Der Motor sitzt am Tretlager und bietet eine direkte Kraftübertragung.";
+      details = `
+        <span class="highlight-green">✔ Gleichmäßige Gewichtsverteilung</span>
+        <span class="highlight-green">✔ Effektiv bei Anstiegen</span>
+        <span class="highlight-green">✔ Natürliches Fahrgefühl</span>
+        <br>
+        <span class="highlight-red">✘ Höherer Verschleiß von Antriebskomponenten</span>
+        <span class="highlight-red">✘ Instandhaltung etwas aufwendiger</span>
+        <span class="highlight-red">✘ Teurer in der Anschaffung</span>`;
+      imageSrc = "https://cdn.shopify.com/s/files/1/0645/8933/2716/files/motor_mid.svg?v=1743505837.svg";
+    } else if (type === "front") {
+      title.innerText = "Frontmotor";
+      descText = "Der Motor ist in der Vorderradnabe integriert und eignet sich besonders für Stadtfahrten.";
+      details = `
+        <span class="highlight-green">✔ Günstiger Einstieg</span>
+        <span class="highlight-green">✔ Einfach nachrüstbar</span>
+        <span class="highlight-green">✔ Kompatibel mit Nabenschaltung und Rücktrittbremse</span>
+        <br>
+        <span class="highlight-red">✘ Geringere Traktion bei Nässe</span>
+        <span class="highlight-red">✘ Unnatürliches Fahrgefühl</span>
+        <span class="highlight-red">✘ Instabil bei hoher Leistung und schwerem Gelände</span>`;
+      imageSrc = "https://cdn.shopify.com/s/files/1/0645/8933/2716/files/motor_front.svg?v=1743505837.svg";
+    }
+
+    description.innerText = descText;
+    detailsContainer.innerHTML = details;
+    bikeImage.src = imageSrc;
+  }
+
+  window.onload = function() {
+    updateContent("rear");
+  };
+</script>
+</body>
+</html>

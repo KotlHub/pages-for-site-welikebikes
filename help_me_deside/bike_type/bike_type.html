@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welches Fahrrad passt zu dir?</title>
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background: #f4f4f4; color: #021530; margin: 0; padding: 0; }
+    .container { max-width: 700px; margin: 0 auto; padding: 40px 20px; background: #fff; }
+    h1 { color: #13BABC; font-size: 2rem; text-align: center; margin-bottom: 20px; }
+    .question { margin-bottom: 24px; font-size: 1.2rem; }
+    .buttons { display: flex; gap: 20px; margin-top: 10px; }
+    .btn { padding: 10px 20px; font-size: 1rem; border: none; cursor: pointer; border-radius: 8px; }
+    .yes { background-color: #76CCD9; color: #fff; }
+    .no { background-color: #ddd; color: #021530; }
+    .hidden { display: none; }
+    #result { text-align: center; margin-top: 40px; }
+    #result h2 { font-size: 1.6rem; color: #13BABC; }
+    #result img { max-width: 100%; height: auto; margin-top: 20px; border-radius: 16px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welches Fahrrad passt zu dir?</h1>
+    <div id="quiz">
+      <div class="question" data-index="0">Fährst du meistens in der Stadt?</div>
+      <div class="question hidden" data-index="1">Willst du auch auf Schotterwegen oder Feldwegen fahren?</div>
+      <div class="question hidden" data-index="2">Planst du längere Touren auf Asphalt?</div>
+      <div class="question hidden" data-index="3">Möchtest du sportlich unterwegs sein?</div>
+      <div class="question hidden" data-index="4">Fährst du gerne im Wald oder Gebirge?</div>
+      <div class="question hidden" data-index="5">Brauchst du ein Fahrrad für den Transport von Kindern oder Einkäufen?</div>
+      <div class="question hidden" data-index="6">Möchtest du dein Fahrrad oft in den Zug mitnehmen?</div>
+      <div class="question hidden" data-index="7">Soll das Fahrrad auch im Winter genutzt werden?</div>
+      <div class="question hidden" data-index="8">Bevorzugst du aufrechte Sitzposition?</div>
+      <div class="question hidden" data-index="9">Magst du Geschwindigkeit und wenig Gewicht?</div>
+      <div class="buttons">
+        <button class="btn yes" onclick="answer(true)">Ja</button>
+        <button class="btn no" onclick="answer(false)">Nein</button>
+      </div>
+    </div>
+    <div id="result" class="hidden">
+      <h2 id="bikeType"></h2>
+      <img id="bikeImage" src="" alt="Empfohlenes Fahrrad" />
+    </div>
+  </div>
+
+  <script>
+    const questions = document.querySelectorAll('.question');
+    let current = 0;
+    let score = { city: 0, gravel: 0, road: 0, mtb: 0, cargo: 0 };
+
+    function answer(yes) {
+      const text = questions[current].textContent;
+      if (yes) {
+        if (text.includes("Stadt")) score.city++;
+        if (text.includes("Schotter")) score.gravel++;
+        if (text.includes("Touren")) score.road++;
+        if (text.includes("sportlich")) score.road++;
+        if (text.includes("Wald")) score.mtb++;
+        if (text.includes("Transport")) score.cargo++;
+        if (text.includes("Zug")) score.city++;
+        if (text.includes("Winter")) score.gravel++;
+        if (text.includes("aufrechte")) score.city++;
+        if (text.includes("Geschwindigkeit")) score.road++;
+      }
+
+      questions[current].classList.add('hidden');
+      current++;
+      if (current < questions.length) {
+        questions[current].classList.remove('hidden');
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.querySelector('.buttons').classList.add('hidden');
+      const result = Object.entries(score).sort((a, b) => b[1] - a[1])[0][0];
+      const resultText = {
+        city: "Stadtrad (Citybike)",
+        gravel: "Gravelbike",
+        road: "Rennrad",
+        mtb: "Mountainbike",
+        cargo: "Lastenrad (Cargobike)"
+      }[result];
+      const resultImg = {
+        city: "https://cdn.pixabay.com/photo/2017/08/01/08/29/bicycle-2561438_1280.jpg",
+        gravel: "https://cdn.pixabay.com/photo/2020/10/25/14/53/gravel-bike-5685844_1280.jpg",
+        road: "https://cdn.pixabay.com/photo/2017/02/01/22/02/road-bike-2034567_1280.jpg",
+        mtb: "https://cdn.pixabay.com/photo/2016/11/29/10/07/bike-1868162_1280.jpg",
+        cargo: "https://cdn.pixabay.com/photo/2016/06/20/09/00/bike-1469964_1280.jpg"
+      }[result];
+
+      document.getElementById('bikeType').textContent = `Du brauchst ein ${resultText}!`;
+      document.getElementById('bikeImage').src = resultImg;
+      document.getElementById('result').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
