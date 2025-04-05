@@ -75,12 +75,14 @@
 
     /* Category Buttons */
     .categories {
-      display: flex;
-      gap: 40px; /* More space between buttons */
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
-    }
+  display: flex;
+  flex-wrap: wrap; /* this is the key */
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 
     .category {
       width: 180px;
@@ -219,6 +221,9 @@
           </ul>
           <ul>
             <li onclick="location.href='motors-positionen'">Motors Positionen</li>
+          </ul>
+          <ul>
+            <li onclick="location.href='sensors'">Sensors</li>
           </ul>
         </div>
       </div>
