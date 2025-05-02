@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bike Leasing Infos</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      color: #021530;
+      text-align: center;
+    }
+
+    .tab-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 12px 20px;
+      background: #021530;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .tab.active {
+      background: #13BABC;
+    }
+
+    .tab:hover {
+      background: #0f9a99;
+      transform: scale(1.05);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .content-box {
+      background-color: #021530;
+      color: white;
+      border-radius: 8px;
+      padding: 30px;
+      text-align: left;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+
+    .content-box.active {
+      display: block;
+    }
+
+    .content-box h2 {
+      color: #76CCD9;
+      margin-bottom: 15px;
+    }
+
+    .content-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .content-box ul li {
+      margin-bottom: 20px;
+    }
+
+    .cta {
+      margin-top: 30px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    a.cta-link {
+      color: #13BABC;
+      text-decoration: none;
+    }
+
+    a.cta-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Leasingvorteile mit We Like Bikes</h1>
+
+<div class="tab-container">
+  <button class="tab active" onclick="showSlide(0)">Warum Leasing?</button>
+  <button class="tab" onclick="showSlide(1)">Steuervorteile</button>
+  <button class="tab" onclick="showSlide(2)">Mitarbeiterbindung</button>
+  <button class="tab" onclick="showSlide(3)">Unsere Leistungen</button>
+  <button class="tab" onclick="showSlide(4)">Empfehlen</button>
+</div>
+
+<div class="container">
+  <div class="content-box active">
+    <h2>🚲 Warum Diensträder anbieten?</h2>
+    <ul>
+      <li>✅ Talente gewinnen und binden</li>
+      <li>✅ Gesundheit und Produktivität der Mitarbeitenden fördern</li>
+      <li>✅ Nachhaltiges Image des Unternehmens stärken</li>
+      <li>✅ Von attraktiven Steuervorteilen profitieren</li>
+    </ul>
+  </div>
+
+  <div class="content-box">
+    <h2>💶 Steuervorteile in Deutschland</h2>
+    <ul>
+      <li><strong>Für Mitarbeitende:</strong><br>
+        Leasingrate wird vom Bruttogehalt abgezogen → bis zu 40 % Ersparnis<br>
+        Nur 0,25 % des Listenpreises wird monatlich als geldwerter Vorteil versteuert<br>
+        Nutzung hat keinen Einfluss auf die Entfernungspauschale
+      </li>
+      <li><strong>Für Arbeitgeber:</strong><br>
+        Leasingkosten sind voll abzugsfähig<br>
+        Geringeres Bruttogehalt → weniger Sozialabgaben<br>
+        Dienstradleasing kann für das Unternehmen kostenneutral sein
+      </li>
+    </ul>
+  </div>
+
+  <div class="content-box">
+    <h2>👥 Vorteile für die Mitarbeiterbindung</h2>
+    <ul>
+      <li>75 % der Unternehmen berichten, dass Leasing die Bindung verbessert</li>
+      <li>Mitarbeitende fühlen sich wertgeschätzt und unterstützt</li>
+      <li>Radfahren reduziert Stress → weniger Krankheitstage, höhere Leistung</li>
+      <li>Ein moderner, nachhaltiger Benefit mit großer Wirkung</li>
+    </ul>
+  </div>
+
+  <div class="content-box">
+    <h2>🛠️ We Like Bikes macht’s einfach</h2>
+    <ul>
+      <li>Wir übernehmen:<br>
+        – Vertragsabwicklung<br>
+        – Kommunikation mit HR oder Geschäftsführung<br>
+        – Wartung, Versicherung und Serviceangebote<br>
+        – Jährliche Vor-Ort-Inspektionen
+      </li>
+      <li>Optional: kostenpflichtige Reparaturen direkt bei Ihnen vor Ort</li>
+    </ul>
+  </div>
+
+  <div class="content-box">
+    <h2>📩 Jetzt Firma empfehlen</h2>
+    <ul>
+      <li>Du willst Diensträder im Unternehmen?</li>
+      <li>Du kennst jemanden, der mit uns sprechen sollte?</li>
+      <li>→ Empfiehl uns jetzt weiter und wir übernehmen den Rest!</li>
+      <li><a href="" class="cta-link">[🔗 Formular ausfüllen]</a></li>
+    </ul>
+  </div>
+  <div class="cta">👉 <a href="#" class="cta-link">Jetzt Leasing-Fahrrad sichern!</a></div>
+</div>
+
+<script>
+  function showSlide(index) {
+    const contentBoxes = document.querySelectorAll(".content-box");
+    const tabs = document.querySelectorAll(".tab");
+    contentBoxes.forEach((box) => box.classList.remove("active"));
+    tabs.forEach((tab) => tab.classList.remove("active"));
+    contentBoxes[index].classList.add("active");
+    tabs[index].classList.add("active");
+  }
+</script>
+
+</body>
+</html>

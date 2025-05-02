@@ -211,6 +211,15 @@
     let interestRate = parseFloat(document.getElementById("interest").value) / 100;
     let downpayment = parseFloat(document.getElementById("downpayment").value);
 
+    if (
+      isNaN(price) || isNaN(interestRate) || isNaN(downpayment) ||
+      price < 0 || interestRate < 0 || downpayment < 0 || downpayment > price
+    ) {
+      document.getElementById("monthlyPayment").innerText = "Ungültige Eingabe";
+      document.getElementById("totalInterest").innerText = "-";
+      return;
+    }
+
     let loanAmount = price - downpayment;
     let monthlyRate = interestRate / 12;
 
@@ -222,6 +231,12 @@
     }
 
     let totalInterest = monthlyPayment * duration - loanAmount;
+
+    if (monthlyPayment < 0 || !isFinite(monthlyPayment)) {
+      document.getElementById("monthlyPayment").innerText = "Ungültige Berechnung";
+      document.getElementById("totalInterest").innerText = "-";
+      return;
+    }
 
     document.getElementById("monthlyPayment").innerText = monthlyPayment.toFixed(2) + " €";
     document.getElementById("totalInterest").innerText = totalInterest.toFixed(2) + " €";
