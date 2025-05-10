@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motor Tips</title>
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f9f9;
+      color: #021530;
+      margin: 0;
+
+      text-align: center;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .box {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 250px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .box h2 {
+      background-color: #021530;
+      color: #76CCD9;
+      padding: 10px;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      margin: -20px -20px 20px -20px;
+    }
+
+    .box ul {
+      text-align: left;
+      padding-left: 20px;
+      flex-grow: 1;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px auto 0;
+      padding: 10px 20px;
+      background-color: #13BABC;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      width: auto;
+      min-width: 120px;
+      height: 40px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+      border: 0;
+    }
+
+    .button:hover {
+      background-color: #0f9a99;
+      transform: scale(1.05);
+    border: 0;
+
+}
+.button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+    /* MODAL STYLES */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 400px;
+      position: relative;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        display: block;
+        text-align: center;
+      }
+      .box {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+.box:focus-within {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="box">
+    <h2>3.5 kg</h2>
+    <ul>
+      <li>...bringt ein durchschnittlicher Mittelmotor auf die Waage.</li>
+    </ul>
+    <button class="button" onclick="openModal('gewicht')">Mehr über das Gewicht -></button>
+  </div>
+
+  <div class="box">
+    <h2>250 Watt</h2>
+    <ul>
+      <li>So viel darf laut Gesetz ein eBike-Motor maximale Nenndauerleistung erbringen.</li>
+    </ul>
+    <button class="button" onclick="openModal('nenndauerleistung')">Mehr über die Nenndauerleistung -></button>
+  </div>
+
+  <div class="box">
+    <h2>3-5 Sensoren</h2>
+    <ul>
+      <li>So viele Sensoren besitzen moderne eBike Antriebe in der Regel.</li>
+    </ul>
+    <button class="button" onclick="openModal('sensoren')">Mehr über die Sensoren -></button>
+  </div>
+
+  <div class="box">
+    <h2>60-80 Nm</h2>
+    <ul>
+      <li>In diesem bereich liegt der maximale Derchzahlbereich der meisten eBike Motoren.</li>
+    </ul>
+    <button class="button" onclick="openModal('drehmoment')">Mehr über die Drehmoment -></button>
+  </div>
+
+  <div class="box">
+    <h2>300%</h2>
+    <ul>
+      <li>Bis zum diesem Wert unterstuzt ein eBike-Antrieb die physische Kraft des Fahrers.</li>
+    </ul>
+    <button class="button" onclick="openModal('unterstutzung')">Mehr zur Unterstutzung -></button>
+  </div>
+
+  <div class="box">
+    <h2>20-120 U/min</h2>
+    <ul>
+      <li>In diesem Trittfrequenzbereich unterstützen die meisten eBike Antriebe Ihre Fahrer.</li>
+    </ul>
+    <button class="button" onclick="openModal('trittfrequenz')">Mehr zur Trittfrequenz -></button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div id="infoModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+  </div>
+</div>
+
+<script>
+  function openModal(type) {
+    let modal = document.getElementById("infoModal");
+    let title = document.getElementById("modalTitle");
+    let text = document.getElementById("modalText");
+
+    if (type === "gewicht") {
+      title.innerText = "Mehr Infos zur Gewährleistung";
+      text.innerText = "Die Gewährleistung ist gesetzlich geregelt und schützt Käufer vor Mängeln, die bereits beim Kauf bestanden haben.";
+    } else if (type === "nenndauerleistung") {
+      title.innerText = "Mehr Infos zur Garantie";
+      text.innerText = "Die Garantie ist eine freiwillige Leistung des Herstellers oder Händlers und geht oft über die gesetzliche Gewährleistung hinaus.";
+    }
+
+    modal.style.display = "flex";
+  }
+
+  function closeModal() {
+    document.getElementById("infoModal").style.display = "none";
+  }
+
+  // Close modal when clicking outside
+  window.onclick = function(event) {
+    let modal = document.getElementById("infoModal");
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  // Close modal on ESC key press
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+      closeModal();
+    }
+  });
+</script>
+
+</body>
+</html>
