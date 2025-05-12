@@ -98,7 +98,7 @@
       padding: 20px;
       border-radius: 8px;
       text-align: center;
-      max-width: 400px;
+      max-width: 660px;
       position: relative;
     }
 
@@ -191,17 +191,64 @@
 
 <script>
   function openModal(type) {
-    let modal = document.getElementById("infoModal");
-    let title = document.getElementById("modalTitle");
-    let text = document.getElementById("modalText");
+    const modal = document.getElementById("infoModal");
+    const title = document.getElementById("modalTitle");
+    const text  = document.getElementById("modalText");
 
     if (type === "gewicht") {
-      title.innerText = "Mehr Infos zur Gewährleistung";
-      text.innerText = "Die Gewährleistung ist gesetzlich geregelt und schützt Käufer vor Mängeln, die bereits beim Kauf bestanden haben.";
-    } else if (type === "nenndauerleistung") {
-      title.innerText = "Mehr Infos zur Garantie";
-      text.innerText = "Die Garantie ist eine freiwillige Leistung des Herstellers oder Händlers und geht oft über die gesetzliche Gewährleistung hinaus.";
+      title.innerText = "Gewicht";
+      text.innerHTML =
+        "<b>Rund dreieinhalb Kilo wiegt ein durchschnittlicher eBike-Antrieb. Dabei gilt: je höher die Leistung, desto höher auch das Gewicht, denn Leistung braucht Wicklungen und die „wiegen“.</b><br><br>" +
+        "Als größter Gewichtstreiber schlägt der interne Elektromotor zu Buche. Grund sind seine Wicklungen aus Kupferdraht. Daneben bringen Bauteile wie das interne Getriebe oder das Gehäuse zusätzliches Gewicht auf die Waage.<br><br>" +
+        "<b>Warum sind S-Pedelec Motoren gleich schwer?</b><br>" +
+        "Die Antwort ist meist recht einfach: es sind die gleichen Motoren. Denn für die Hersteller lohnt es sich nicht, zwei unterschiedliche Leistungsklassen zu konstruieren. Daher wird die 25 km/h Version mittels Software begrenzt. Grundsätzlich werden alle Motoren teils weit unterhalb ihrer Leistungsgrenze betrieben.";
+    } 
+    else if (type === "nenndauerleistung") {
+    title.innerText = "Nenndauerleistung";
+    text.innerHTML =
+    "<b>Als maximale Nenndauerleistung</b> wird gesetzlich die durchschnittliche Höchstleistung definiert, die ein 250 Watt eBike Motor innerhalb eines Zeitraums von 30 Minuten abgeben kann, ohne dass sich seine Temperatur über 20° erhöht. Nicht definiert ist hingegen die kurzfristige maximale Leistung, da darf der Motor seine volle Leistung bieten.<br><br>" +
+    "<b>Verwirrend?</b><br>" +
+    "Die oben genannte Definition ist eine gesetzliche Methode zur Festlegung der Leistung, die auf den ersten Blick schwer nachvollziehbar ist. Sie wird etwas klarer, wenn man sich vor Augen hält, dass ein Elektromotor, der sehr viel Wärme abgibt, in einem schlechten Wirkungsbereich bzw. bereits an der Überlast betrieben wird, was diese Regelung <i>(wahrscheinlich)</i> verhindern soll.";
     }
+    else if (type === "sensoren") {
+  title.innerText = "Sensoren";
+  text.innerHTML =
+    "Damit ein eBike-Antrieb zuverlässig funktioniert, braucht er Informationen, die er von Sensoren bezieht:<br><br>" +
+    "<b>1. Der Drehmoment-Sensor</b> misst an der Tretlagerwelle, wie stark der Fahrer tritt.<br><br>" +
+    "<b>2. Der Drehzahl-Sensor</b> misst, wie schnell der Fahrer tritt.<br><br>" +
+    "<b>3. Der Geschwindigkeitssensor</b> liefert die Werte, mit der die Geschwindigkeit des eBikes errechnet werden kann.<br><br>" +
+    "<b>4. Der Temperatur-Sensor</b> ermittelt die Temperatur im Inneren des Antriebs, um ihn vor Überhitzung zu schützen.<br><br>" +
+    "<b>5. Ein Lage- oder Gyrosensor</b> erkennt die aktuelle Lage des eBikes, z. B. ob es bergauf oder bergab fährt.";
+}
+
+else if (type === "drehmoment") {
+  title.innerText = "Drehmoment";
+  text.innerHTML =
+    "<b>Das Drehmoment</b> beschreibt die Dreheinwirkung einer Kraft auf einen Körper und wird meist in Newtonmeter angegeben.<br><br>" +
+    "<b>Ein Newtonmeter …</b><br>" +
+    "… ist, vereinfacht gesagt, die Kraft, die aufgewendet werden muss, um die Gewichtskraft von einem Newton (102 Gramm) an einem Hebel von einem Meter Länge im Gleichgewicht halten zu können.<br><br>" +
+    "<b>8 PET Flaschen an einem Meter langen Hebel</b><br>" +
+    "Im konkreten Fall würde ein eBike-Antrieb mit einem maximalen Drehmoment von 80 Newtonmeter das Gewicht von rund 8,16 Kilogramm (ungefähr acht 1L PET-Flaschen) an einem Hebel von einem Meter halten können. Das ist nur geringfügig weniger als ein Smart ForTwo: der besitzt ein maximales Drehmoment von 89 Nm!";
+}
+
+else if (type === "unterstutzung") {
+  title.innerText = "Unterstützung";
+  text.innerHTML =
+    "<b>Pedelec-Antriebe</b> unterstützen den Fahrer, wenn er tritt. Dabei verstärken sie seine physische Kraft genau proportional zu seinem körperlichen Einsatz.<br><br>" +
+    "<b>Unterschiedliche Unterstützungsstufen</b><br>" +
+    "Der Fahrer kann zwischen unterschiedlichen Stufen wählen, wie stark der Antrieb den Fahrer unterstützt. Dabei erreichen viele Motoren eine Verstärkung des Fahrers um das bis zu Dreifache. Damit liegt er auf dem Leistungsniveau eines professionellen Sportlers!<br><br>" +
+    "Moderne Systeme bieten mittlerweile Automatik-Modi an, bei denen der Antrieb selbstständig je nach Fahrsituation die richtige Unterstützungsstufe wählt.";
+}
+
+else if (type === "trittfrequenz") {
+  title.innerText = "Trittfrequenz";
+  text.innerHTML =
+    "<b>Die Trittfrequenz</b> gibt an, wie schnell ein Mensch pro Minute tritt. <b>Moderne eBike Systeme unterstützen in einem Drehzahlbereich von 20 bis 120 U/min.</b><br><br>" +
+    "Für eBike Antriebe gilt, je höher die Trittfrequenz, desto besser ist der Wirkungsgrad und damit die Reichweite: Der Wirkungsgrad eines Motors ist bei 50 Umdrehungen um 25 % geringer als bei 85 Umdrehungen pro Minute!<br><br>" +
+    "Für den Menschen gilt tendenziell das Gleiche: bei höheren Trittfrequenzen werden die Muskeln besser durchblutet und somit besser mit Sauerstoff versorgt. Die kürzeren und geringeren Belastungsspitzen beim schnellen Treten schonen zudem die Gelenke.<br><br>" +
+    "<b>Der ideale Trittfrequenzbereich für Mensch und Maschine dürfte bei rund 75 Umdrehungen in der Minute liegen.</b>";
+}
+
 
     modal.style.display = "flex";
   }
@@ -210,19 +257,13 @@
     document.getElementById("infoModal").style.display = "none";
   }
 
-  // Close modal when clicking outside
-  window.onclick = function(event) {
-    let modal = document.getElementById("infoModal");
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
+  window.onclick = function (event) {
+    const modal = document.getElementById("infoModal");
+    if (event.target === modal) modal.style.display = "none";
   };
 
-  // Close modal on ESC key press
-  document.addEventListener("keydown", function(event) {
-    if (event.key === "Escape") {
-      closeModal();
-    }
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") closeModal();
   });
 </script>
 
