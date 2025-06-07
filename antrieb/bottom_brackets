@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bottom Bracket Vergleich: BSA, Italienisch, Pressfit & T47 | We Like Bikes</title>
+  <meta name="description" content="Vergleich der gängigsten Innenlagertypen für Fahrräder: BSA, italienisches Gewinde, Pressfit und T47. Finde heraus, welches Tretlager zu deinem Bike passt und welche Marken wie Shimano, SRAM, FSA, Rotor oder Campagnolo kompatibel sind." />
+  <meta name="keywords" content="Innenlager Fahrrad, BSA Tretlager, Italienisches Gewinde, Pressfit BB86, T47 Tretlager, Shimano Hollowtech, SRAM DUB, Campagnolo Ultra Torque, FSA MegaExo, Rotor 3D+, CeramicSpeed, Tretlager Vergleich, We Like Bikes" />
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: #021530;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 95%;
+      margin: 0 auto;
+      max-width: 1200px;
+    }
+    h1, h2, h3 {
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    h1 {
+      color: #76CCD9;
+      font-size: 2rem;
+      border-bottom: 2px solid #13BABC;
+      padding-bottom: 8px;
+    }
+    h2 {
+      color: #13BABC;
+      font-size: 1.6rem;
+      border-left: 4px solid #76CCD9;
+      padding-left: 8px;
+      margin-top: 24px;
+      margin-bottom: 12px;
+    }
+    p, ul {
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+    ul {
+      list-style: disc;
+      margin-left: 20px;
+    }
+    .intro {
+      background-color: #f9f9f9;
+      border-left: 4px solid #13BABC;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    .vergleich {
+      background-color: #f2f2f2;
+      border-left: 4px solid #76CCD9;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 16px;
+      border: 2px solid #ccc;
+    }
+    th {
+      background-color: #13BABC;
+      color: #fff;
+      padding: 10px;
+      text-align: left;
+      border-right: 2px solid #fff;
+    }
+    th:last-child {
+      border-right: none;
+    }
+    td {
+      border-bottom: 2px solid #ccc;
+      border-right: 2px solid #ccc;
+      padding: 8px;
+      vertical-align: top;
+    }
+    td:last-child {
+      border-right: none;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    @media only screen and (max-width: 768px) {
+      .container {
+        width: 90%;
+      }
+      table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+      }
+      thead tr {
+        display: none;
+      }
+      tr {
+        margin: 0 0 15px 0;
+        border: 2px solid #ccc;
+        padding: 10px;
+        background-color: #fff;
+      }
+      td {
+        border: none;
+        border-bottom: 2px solid #ccc;
+        padding: 10px 0;
+      }
+      td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: inline-block;
+        width: 120px;
+      }
+      td:last-child {
+        border-bottom: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bottom Brackets im Vergleich: BSA, Italienisch, Pressfit & T47</h1>
+    <div class="intro">
+      <p>Das Innenlager – auch Bottom Bracket genannt – ist das Herzstück deines Antriebssystems. Ob bei <strong>MTB</strong>, <strong>Rennrad</strong> oder <strong>Gravelbike</strong>: Die Wahl des richtigen Systems wie <strong>BSA</strong>, <strong>italienisch</strong>, <strong>Pressfit</strong> oder <strong>T47</strong> ist entscheidend für Performance, Kompatibilität und Langlebigkeit.</p>
+    </div>
+
+    <h2>BSA (British Standard Thread)</h2>
+    <p>Das BSA-Innenlager verwendet ein 1.37” x 24 TPI Gewinde und ist mit 68 mm oder 73 mm Gehäusen verfügbar. Es ist eines der am weitesten verbreiteten Systeme.</p>
+    <ul>
+      <li><strong>Kompatibel mit:</strong> Shimano Hollowtech II, SRAM GXP, DUB (mit Adapter), FSA MegaExo</li>
+      <li><strong>Marken:</strong> Shimano, SRAM, Hope, Praxis Works, Wheels Manufacturing</li>
+      <li><strong>Vorteile:</strong> wartungsfreundlich, langlebig, günstige Ersatzteile</li>
+    </ul>
+
+    <h2>Italienisches Innenlager</h2>
+    <p>Mit 36 mm x 24 TPI (beide Seiten Rechtsgewinde) ist es typisch für klassische Rennräder aus Italien wie <strong>Colnago</strong> oder <strong>Bianchi</strong>.</p>
+    <ul>
+      <li><strong>Kompatibel mit:</strong> Campagnolo Ultra Torque, Miche</li>
+      <li><strong>Vorteile:</strong> Stabilität, einfache Gewindemontage</li>
+      <li><strong>Nachteile:</strong> weniger verbreitet, kann sich lösen</li>
+    </ul>
+
+    <h2>Pressfit-Systeme</h2>
+    <p>Pressfit-Systeme wie <strong>BB86</strong>, <strong>BB92</strong>, <strong>PF30</strong> und <strong>BB30</strong> verwenden keine Gewinde, sondern werden direkt in das Gehäuse gepresst.</p>
+    <ul>
+      <li><strong>Kompatibel mit:</strong> Rotor 3D+, SRAM DUB, Shimano Hollowtech II, FSA BB30</li>
+      <li><strong>Marken:</strong> CeramicSpeed, Token, Kogel Bearings, Enduro Bearings</li>
+      <li><strong>Vorteile:</strong> leicht, steif, erlaubt breitere Rahmen</li>
+      <li><strong>Nachteile:</strong> Geräuschentwicklung bei schlechter Montage</li>
+    </ul>
+
+    <h2>T47 – Das moderne Gewinde</h2>
+    <p>Das <strong>T47</strong>-System kombiniert die Vorteile von Gewinde und großem Durchmesser. Es wird geschraubt, ist aber breiter als BSA.</p>
+    <ul>
+      <li><strong>Kompatibel mit:</strong> SRAM DUB, Shimano Hollowtech II, Rotor</li>
+      <li><strong>Marken:</strong> Chris King, Hope, BBInfinite, White Industries</li>
+      <li><strong>Verwendung:</strong> bei modernen High-End-Bikes (Trek, Open, Specialized)</li>
+    </ul>
+
+    <h2>Wartung und Tipps</h2>
+    <p>Je nach Nutzung empfehlen wir alle 3.000–5.000 km eine Prüfung des Innenlagers. Bei Geräuschen, Spiel oder Rost sofort handeln. Verwende beim Einbau Drehmomentratsche und Montagepaste oder Loctite (bei Pressfit).</p>
+
+    <h2>Fazit</h2>
+    <p>Ob <strong>BSA</strong>, <strong>italienisch</strong>, <strong>Pressfit</strong> oder <strong>T47</strong> – für jede Fahrradgattung gibt es das passende Tretlager. Lass dich von unseren Experten beraten und fahre mit maximaler Effizienz.</p>
+
+    <h2>🚴‍♂️ Vergleich der Innenlager-Typen – We Like Bikes Überblick</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>🔧 Typ</th>
+        <th>🧩 Eigenschaften</th>
+        <th>⚙️ Kompatible Achsen</th>
+        <th>🔩 Lagerart</th>
+        <th>🏷️ Marken</th>
+        <th>📍 Verwendung</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>BSA (Englisches Gewinde)</td>
+        <td>1.37" x 24 TPI, 68/73 mm, geschraubt, Standard bei vielen Rahmen</td>
+        <td>Hollowtech II (24 mm), SRAM GXP, DUB (28,99 mm), FSA MegaExo</td>
+        <td>Industrielager, oft gedichtet, austauschbar</td>
+        <td>Shimano, SRAM, Hope, Chris King, Praxis</td>
+        <td>MTB, Rennrad, Gravel, Trekking</td>
+      </tr>
+      <tr>
+        <td>Italienisch (36x24)</td>
+        <td>Beidseitig Rechtsgewinde, klassisches System 🇮🇹</td>
+        <td>Campagnolo Ultra-Torque, ältere Systeme</td>
+        <td>Kugellager (gedichtet oder lose)</td>
+        <td>Campagnolo, Miche, Token</td>
+        <td>Klassische italienische Rennräder (Bianchi, Colnago)</td>
+      </tr>
+      <tr>
+        <td>Pressfit BB86 / BB92</td>
+        <td>Gepresst ins Gehäuse, keine Gewinde, Ø41 mm Hülse</td>
+        <td>Hollowtech II (24 mm), DUB (mit Adapter), Rotor 24</td>
+        <td>Gepresste Industrielager, meist gedichtet</td>
+        <td>Shimano, Token, CeramicSpeed, Wheels MFG</td>
+        <td>Rennrad, MTB, E-Bike Carbonrahmen</td>
+      </tr>
+      <tr>
+        <td>Pressfit PF30 / BB30</td>
+        <td>30 mm Achse, große Lager direkt im Rahmen, wenig Material</td>
+        <td>SRAM BB30, FSA 386 EVO, Rotor 30 mm</td>
+        <td>Große Industrielager, oft nicht gedichtet</td>
+        <td>SRAM, FSA, Rotor, Enduro, CeramicSpeed</td>
+        <td>High-End Rennrad & MTB</td>
+      </tr>
+      <tr>
+        <td>T47</td>
+        <td>Kombiniert Pressfit-Durchmesser mit Gewinde 🧵</td>
+        <td>24 mm, 30 mm, DUB – alles möglich mit passenden Lagern</td>
+        <td>Schraublager mit Gewinde & Industrielagern</td>
+        <td>Chris King, White Industries, Hope</td>
+        <td>High-End Gravel, Carbonrahmen, Custom Builds</td>
+      </tr>
+      <tr>
+        <td>Vierkant (JIS oder ISO)</td>
+        <td>Innenlager mit quadratischer Achse, klassische Bauform ⬛</td>
+        <td>Vierkant-Kurbeln (Sugino, ältere Shimano, Tourney)</td>
+        <td>Kugellager in versiegeltem Gehäuse</td>
+        <td>Shimano, Thun, Neco, Sunrace</td>
+        <td>Citybike, Retro, Reiseräder, Einsteiger-MTB</td>
+      </tr>
+      <tr>
+        <td>Octalink</td>
+        <td>Shimano-eigenes System, 8 Zähne, größere Oberfläche</td>
+        <td>Shimano Octalink-Kurbeln (ältere Ultegra, 105)</td>
+        <td>Industrielager, gedichtet</td>
+        <td>Shimano</td>
+        <td>MTB & Rennrad 2000er Jahre</td>
+      </tr>
+      <tr>
+        <td>ISIS Drive</td>
+        <td>Kompatibel mit 10-Zahn Innenvierkant, offen standardisiert</td>
+        <td>Truvativ, FSA, Race Face Kurbeln</td>
+        <td>Industrielager, meist versiegelt</td>
+        <td>Truvativ, FSA, Token, Neco</td>
+        <td>Freeride, ältere MTB, BMX</td>
+      </tr>
+    </tbody>
+  </table>
+  <p><strong>🔍 Tipp von We Like Bikes:</strong> Wenn du unsicher bist, welches Innenlager du brauchst, bring dein Fahrrad zu uns! Wir messen dein Gehäuse, prüfen Kompatibilität mit Kurbel und empfehlen dir das passende Lager – langlebig, leichtgängig und wartungsarm. 🚲🛠️</p>
+
+
+    <p><em>#Innenlager #BSA #T47 #Shimano #SRAM #Campagnolo #CeramicSpeed #WeLikeBikes #FahrradService</em></p>
+  </div>
+</body>
+</html>
